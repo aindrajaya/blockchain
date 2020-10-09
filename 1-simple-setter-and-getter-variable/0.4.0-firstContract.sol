@@ -1,4 +1,4 @@
-pragma solidity >=0.4.22 < 0.7.1;
+pragma solidity ^0.4.0;
 
 contract FirstContract{
     string private name;
@@ -6,20 +6,20 @@ contract FirstContract{
 
     //set and get method to set and get name/age
     //name
-    function setName(string memory newName)public{
+    function setName(string newName){
         name = newName;
     }
 
-    function getName()view public returns (string memory){
+    function getName() returns(string){
         return name;
     }
 
     //age
-    function setAge(uint newAge)public{
+    function setAge(uint newAge){
         age = newAge;
     }
 
-    function getName() view public returns(uint){
+    function getName() returns(uint){
         return age;
     }
 }
