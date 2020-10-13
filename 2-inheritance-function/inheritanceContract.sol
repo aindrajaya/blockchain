@@ -2,7 +2,7 @@ pragma solidity >=0.4.22 < 0.7.1;
 
 interface Regulator{
     function checkValue(uint amount) returns(bool);
-    function bool() returns(bool);
+    function loan() returns(bool);
 }
 
 contract Bank is Regulator{
