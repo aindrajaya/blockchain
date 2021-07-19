@@ -1,9 +1,0 @@
-Boilerplate Design
-#Issue
-1. Need to be able to write Solidity code in a JavaScript project
-2. Need some way to rapidly test contracts without doing the manual testing we were doing with Remix
-3. Need some way to deploy our contract to public networks
-#Solution
-1. Set up the Solidity compiler to build our contracts
-2. Set up custom Mocha test runner that can somehow test Solidity code
-3. Set up a deploy script to compile+deploy our contract
