@@ -81,15 +81,11 @@ All cyrptocurrencies are based on blockchain technology. Blockchain is what make
 #WHAT NEXT?
 
 
+
+
 =============================================================
 CHAPTER 2: WHAT IS A BITCOIN NODE? MINING VERSUS VALIDATION
-By Bruno Skvorc
-This introduciton to Bitcoin Ndoes was originally published at Bruno Bitfalls website, and is reproduced here with permission.
-You'll often hear the word node thrown aroun in blockchain and cryptocurrency circles. If you've read our intro blockchain (and we highly recommend you do that), one of the characters in the comic there that's writing down transactions on a piece of paper is actually a node. That introduction is quite simplified, however- so let's explain the concept of nodes in  a bit more detail now.
-----
-#Validation Nodes
-One node is a computer running specific software. In the case of Bitcoin, one node is a Bitcoin program which connects to other Bitcoin nodes, i.e other Bitcoin programs on the same machine, or on the 
-
+By
 
 
 =============================================================
