@@ -1,0 +1,6 @@
+IMPLEMENTING A SIMPLE BLOCKCHAIN IN JAVA
+(https://www.baeldung.com/java-blockchain)
+--------------------------------------------
+1. OVERVIEW
+In this tutorial, we'll learn the basic concepts of blockchain technology. We'll also implement a basic application in Java that focuses on the concepts. Further, we'll discuss some advanced concepts and practicel applications of this technology.
+
