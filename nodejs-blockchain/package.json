@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-blockchain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "build": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongodb": "^4.0.1",
+    "nodemon": "^2.0.12",
+    "shortid": "^2.2.16",
+    "truffle-contract": "^4.0.31",
+    "web3": "^1.5.0"
+  }
+}

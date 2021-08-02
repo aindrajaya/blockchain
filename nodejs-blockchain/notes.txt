@@ -495,3 +495,12 @@ As we have noticed, our app is a decentralized app. However, it’s not fully de
 The final thing after coding is to start our server by running npm run start or npm run build and test our backend endpoints on either the browser or with Postman. After running and testing our API we could add more features to our backend and blockchain smart contract. If you’d like to get more guidance on that, please check the further reading section for more articles. It’s worth mentioning that it is critical to write unit and integration tests for our API to ensure correct and desirable behaviors. Once we have all of that done, we can deploy our application on the cloud for public use. This can be done on its own with or without adding a frontend (microservices) on Heroku, GCP, or AWS for public use. Happy coding!
 
 
+#STEP BY STEP BUILDING
+1. set up the backend
+[ $ npm init -y && touch server.js routes.js ]
+
+2. set up the dependency
+[ $ npm install nodemon truffle-contract dotenv mongodb shortid express web3 --save && npm install truffle -g ]
+
+3. Set up the Package.json
+
