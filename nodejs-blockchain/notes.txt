@@ -242,5 +242,256 @@ contract Inbox{
   }
 }]
 In our contract, we have two main functions: the sendIPFS and the getHash functions. Before we talk about the functions, we can see that we had to define a contract first called Inbox. Inside this class, we have structures used in the ipfsInbox object (first events, then modifiers). After defining the structures and events, we have to initialize the contract by calling the constructor function. Then we defiend three functions (The checkInbox function was used in the test for testing results)
-The sendIPFS
+The sendIPFS is where the user inputs the identifier and hash address after which it is stored on the blockchain. The getHash function retrieves the hash adderss when it is given the identifier. Again, the logic behind this is that we ultimately want to store the music in IPFS. To test how it works, you can hop on to a RemixIDE, copy, paste and test your contract, as well as debug any errors and run again.
+After tesing that our code works correctly in the remix, let's move on to compiling it locally with the Truffle suite. But first, we need to make some changes to our files and set up our emulator using ganache-cli.
+First, let's install ganache-cli. In the same directory, run the following command in your terminal
+[ $ npm install ganache-cli -g ]
+Then let's open another Terminal and run another command in the same folder:
+[ $ ganache-cli ]
+This starts up the emulator for our blockchain contract to connect and work. Minimize the Terminal and continue with the other Temrinal you've been using. Now go to the truffle.js file if you're using Linux/Macos or truffle-config.js in Windows, and modify this file to look like this:
+[const path = require('path');
+module.exports = {
+  //to customize your Truffle configurations
+  contract_build_directory: path.join(__dirname, "/build"),
+  networks: {
+    development: {
+      host: "127.0.0.1", 
+      port: 8545,
+      network_id: "*" //match any netowk id
+    }
+  }
+}]
+Basically what we did is adding the patch of the build folder where the smart contract is converted to JSON files. Then we also specified the network that Truffle should use for migration. Then, alsow in the migrations folder, createa a new file naed 2_migrate_inbox.js and add the following code inside the files:
+[var IPFSInbox = artifacts.require("./Inbox.sol");
+module.exports = function(deployer){
+  deployer.deploy(IPFSInbox);
+}]
+We did so to tet the contract file and deploy it automatically to a JSON, using the deployer function during the Truffle migration. After the above chages we run:
+[ $truffle compile ]
+We should see some messages at the end which show successful compilation, such as:
+{> Compiled successfully using:
+    - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
+}
+Next, we migrate our contract by running:
+[ $ truffle migrate ]
+Once we have successfully migrated our contracts, we should have something like this at the end:
+[Summary
+=======
+> Total deployments:   1
+> Final cost:          0.00973432 ETH
+]
+And we're almost done! We have build our API with NodeJS, and also set up and built our smart contract. We should also write tests for our contract test the behaviour of our contract and ensure it is the desired behaviour. The tests are usually written and plaed in the test folder. And example test written in a file named InboxTest.js created in the test folder is:
+[const IPFSInbox = artifacts.requures("./Inbox.sol")
+contract("IPFSInbox", accounts => {
+  it("emit event when you send a ipfs adderss", async() => {
+    //ait for the contract
+    const ipfsInbox = await IPFSInbox.deployed()
+
+    //set a variable to false and get event listener
+    eventEmitter = false
+    //var event = ()
+    await ipfsInbox.ipfsSent((err, res) => {
+      eventEmitter=true
+    })
+    //call the contract function which sends the ipfs's address
+    await ipfsInbo.sendIPFS(accoutns[1], "sampleAddress", {from: accounts[0]})
+    assert.equal(eventEmitted, true, "sending an IPFS request does not emit and event")
+  })
+})]
+So we run our test by running the following:
+[ $ truffle test ]
+It tests our contract with the files in the test folder and shows the number of passed and failed tests. For this tutorial, we should get:
+[$ truffle test
+Using network 'development'.
+Compiling your contracts...
+===========================
+> Compiling .\contracts\Inbox.sol
+> Artifacts written to C:\Users\Ademola\AppData\Local\Temp\test--2508-n0vZ513BXz4N
+> Compiled successfully using:
+   — solc: 0.5.16+commit.9c3226ce.Emscripten.clang
+
+  Contract: IPFSInbox
+    √ emit event when you send an ipfs address (373ms)
+
+  1 passing (612ms)
+]
+
+--
+#Integrating The Smart Contract to the Backend API Using Web3
+
+Most times when you see tutorials, you see decentralzied apps built to integrate the frontend directly to the blockchain. But there are times when teh integration to the backend is needed as well, for example when using third-party backend APIs and services, or when using blockchain to build a CMS. The use of Web3 is very importatn to this cause, as it helps us access remote or local Ethereum nodes and use them in our applications. Before we go on, we'll discuss the local and remote Ethereum nodes. The local nodes are the nodes deployed on our system with emulators like ganache-cli but a remote nodes is one that is deployed on online faucets/platforms like ropsten or rinkeby. To dive in deeper, you can follow a tutorial on how deploye on ropsten  5-minute guide to deploying smart contracts with Truffle and Ropsten or you could use truffle wallet provider and deploy via An Easier Way to Deploy Your Smart Contracts.
+We are using ganache-cli in this tutorial, but if we were deploying on ropstend, we should have copied or store our contract address somewhere like in our .env file, then move on to update the server.js file, import web3, import the migrated contract and set up Web3 instance.
+[
+require('dotenv').config();
+const express = require('express')
+const app = express()
+const routes = require('./routes')
+const Web3 = require('web3')
+const mongodb = require('mongodb').MongoClient
+const contract = require('truffle-contract')
+const artifacts = require('./build/Inbox.json')
+app.use(express.json())
+if(typeof web3 !== 'undefined'){
+  var web3 = new Web3(web3.currentProvider)
+}else{
+  var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
+}
+const LMS = contract(artifacts)
+LMS.setProvider(web3.currentProvider)
+mongodb.connect(process.env.DB, {useUnifiedTopology: true}, async(err, client) => {
+  const db = client.db('Cluster0')
+  const accounts = await web3.eth.getAccounts();
+  const lms = await LMS.deployed();
+  //const lms = LMS.at(contract_address) form remote nodes deployed on ropsten or rinkeby
+  routes(app, db, lms, accounts)
+  app.listen(process.env.PORT || 8082, () => {
+    console.log('listening on port '+ (process.env.PORT || 8082))
+  })
+})
+]
+In the server.js file, we check if the web3 instance is initialzied already. If not, we initialzie it on the network port which we defined earlier (8545). Then we build a contract based on the migrated JSON file and truffle-contract package, and set the contract provider to the Web3 instance provider which mush have been initialized by now. We then get accounts by we3.eth.getAccounts. For the development state, we call the deployed function in our contract class that asks ganache-cli, which is still running- to give us a contract address to use. Bur if we've already deployed our contract to a remote node, we call a function inputting the address as an argument. The sample function is commented below the defined lms variable in our code above. Then we call the routes function inputting the app instance, database instace, contract instance (lms), and accoutns data as arguments. Finally, we listen for requests on port 8082. Also, by now, we should have isntalled the MongoDB package, because we are using it in our API as our database. Once we have that, we move onto the routes page where we use the methods defined in the contract to accomplish tasks like saving and retrieving the music data. In the end, our routes.js should look like this:
+[
+const shortid = require('short-id')
+const IPFS = require('ipfs-api')
+const ipfs = IPFS({
+  host: 'ipfs.infura.io',
+  port: 5001,
+  protocol: 'https'
+})
+
+function routes(app, dbe, lms, accoutns){
+  let db = dbe.collection('music-users')
+  let music = dbe.collection('music-store')
+  app.post('/register', (req,res) => {
+    let email = req.body.email
+    let idd = shortid.generate()
+    if(email){
+      db.findone({email}, (err, doc) => {
+        if(doc){
+          res.status(400).json({
+            "status":Failed", 
+            "reason":"Already registered"
+          })
+        }else{
+          db.insertOne({email})
+          res.json({
+            "status": "success",
+            "id": idd
+          })
+        }
+      })
+    }else{
+      res.status(400).json({
+        "status":"Failsed",
+        "reason":"wrong input"
+      })
+    }
+  })
+
+  app.post('./login', (req,res) => {
+    let email = req.body.email
+    if(email){
+      db.findOne({email}, (err, doc) => {
+        if(doc){
+          res.json({
+            "status":"success",
+            "id":doc.id
+          })
+        }else{
+          res.status(400).json({
+            "status": "Failed",
+            "reason": "not recognised"
+          }) 
+        }
+      })
+    }else{
+      res.status(400).json({
+        "status": "Failed",
+        "reason": "wrong input"
+      })
+    }
+  })
+  
+  app.post('./upload', async(req,res) => {
+    let buffer = req.body.buffer
+    let name = req.body.name
+    let title = req.body.title
+    let id = shortid.generate() + shortid.generate()
+    if(buffer && title){
+      let ipfsHash = await ipfs.add(buffer)
+      let hash = ipfsHash[0].hash
+      lms.sendIPFS(id, hash, {from: accounts[0]})
+      .then((_hash, _address) => {
+        music.insertOne({id, hash, title, name})
+        res.json({
+          "status": "success",
+          id
+        })
+      })
+      .catch(err => {
+        res.status(400).json({
+          "status": "Failed", 
+          "reason": "wrong input"
+        }) 
+      })
+    }else{
+      res.status(400).json({
+        "status": "Failed",
+        "reason": "wrong input"
+      })
+    } 
+  })
+
+  app.get('./access/:email', (req, res) => {
+    if(req.params.email){
+      db.findOne({
+        email: req.body.email
+      }, (err, doc) => {
+        if(doc){
+          let data = music.find().toArray()
+          res.json({"status": "success", data})
+        }
+      })
+    }else{
+      res.status(400).json({
+        "status": "Failed",
+        "reason": "wrong input"
+      })
+    }
+  })
+
+  app.get('/access/:email/:id', (req,res) => {
+    let id = req.params.id
+      if(req.params.id && req.params.email){
+        db.findOne({email: req.body.email}, (err, doc) => {
+          if(doc){
+            lms.getHash(id, {from: accounts[0]})
+            .then(async(hash) => {
+              let data = await ipfs.files.get(hash)
+              res.json({"status": success, data: data.content})
+            })
+          }else{
+            res.status(400).json({
+              "status": "Failed", 
+              "reason": "wrong input"
+            })
+          }
+        })
+      }else{
+        res.status(400).json({
+          "status": "Failed",
+          "reason": "wrong input"
+        })
+      }
+  })
+}]
+At the beginning of the routes file, we imported the short-id package and ipfs-http-client and then initialized IPFS with HTTP client using the backend URL ipfs.infura.io and port 5001. This allowed us to use the IPFS methods to upload and retrieve data from IPFS. In the upload route, we save the audio buffer to IPFS which is better compared to just storing it on the blockchain for anyone registered or unregistered to use. Then we sved the address of the buffer in the blockchain by generatting and ID and using it as an identifier in the sendIPFS functin. Finally, then we save all the outher data associated with the music file to our database. We should not forget to updat our argument in the routes function since we changed it in the server.js file. 
+In the access route using id, we then retrieve our data by getting the id from the request, using the id to access the IPFS hash address, and then access the audio buffer using the address. But this requires authentication of a user by email is done before anything else.
+Phew, we’re done! Right now we have an API that can receive requests from users, access a database, and communicate to a node that has the software running on them. We shouldn’t forget that we have to export our function with module.exports though!
+As we have noticed, our app is a decentralized app. However, it’s not fully decentralized as we only stored our address data on the blockchain and every other piece of data was stored securely in a centralized database which is the basis for semi-dApps. So the consumption of data can be done directly via request or using a frontend application in JavaScript to send fetch requests. Our music store backend app can now safely store music data and provide access to anyone who needs to access it, provided it is a registered user. Using blockchain for music sharing makes it cheaper to store music data while focusing on connecting artists directly with users, and perhaps it could help them generate revenue that way. This wouldn’t require a middleman that uses royalty; instead, all of the revenue would go to the artist as users request their music to either download or stream. A good example of a music streaming application that uses blockchain just like this is Opus OPUS: Decentralized music sharing platform. However, there are also a few others like Musicoin, Audius, and Resonate.
+-----------------------
+
+#What Next?
+The final thing after coding is to start our server by running npm run start or npm run build and test our backend endpoints on either the browser or with Postman. After running and testing our API we could add more features to our backend and blockchain smart contract. If you’d like to get more guidance on that, please check the further reading section for more articles. It’s worth mentioning that it is critical to write unit and integration tests for our API to ensure correct and desirable behaviors. Once we have all of that done, we can deploy our application on the cloud for public use. This can be done on its own with or without adding a frontend (microservices) on Heroku, GCP, or AWS for public use. Happy coding!
+
 
