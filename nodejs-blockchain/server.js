@@ -13,7 +13,7 @@ if(typeof web3 !== 'undefined'){
   var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 }
 
-const uriDB = "mongodb+srv://jaya:fizpjNaCk40iBXuZ@jayakatwang.vw9n8.mongodb.net/blockchain?retryWrites=true&w=majority";
+const uriDB = "MONGODB URI";
 const LMS = contract(artifacts)
 LMS.setProvider(web3.currentProvider)
 
