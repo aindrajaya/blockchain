@@ -1,0 +1,246 @@
+HOW TO BUILD A NODEJS API FOR ETHEREUM BLOCKCHAIN
+(https://www.smashingmagazine.com/2021/01/nodejs-api-ethereum-blockchain/)
+--------------------------------------------
+QUICK SUMMARY ↬ In this article, John Agbanusi explains how you can build a Node.js API from scratch by building and deploying an Ethereum Blockchain for decentralization. He also shows you a step-by-step process of integrating both the API and blockchain into a single API called a “decentralized application API”.
+Blockchain technology has been on the rise in the past ten years, and has brought a good numbe of products and platforms to life such as Chainalysis (finance tech), Burstiq (health-tech), Filamen (IoT), Opus (music streaming) and Ocular (Cybersecurity). From these examples, we can see that blockchain cuts across many products and use cases making it very essential and useful. In fintech (finance tect), it's used as decentralized ledgers for secudiry and transparency in places like Chain, Chainalysis, and is also useful in health tech for the security of sensitive health data in Burstiq and Robomed- not to forget media tech such as Opus and Audius that also use blockchain for royalties transparency and thus get full royalties. Ocular uses security that comes with blockchain for identity management for biometric sytems, while Filament uses blockchain ledgers for real-time encrypted communication. This goes to show how essential blockchain has become to use by making our lives better. But what exactly is a blockchain?
+A blokchain is a database that is shared across a network of computers. Once a record has been added to the chain, it i squite difficult tp change. To ensure that all the copies of the database are the same, the network makes constant checks.
+So why do we need blockchain? Blockchain is a safe way to record activities and keep data fresh while mainatining a records of its history compared to the traditional records or databases where hacks, errors, and downtimes are very possible. The data can't be corrupted by anyone or accidentally deleted, and you benefit from both a historical trail of data and an instantly up-to-date record that can't be erased or become inaccessible due to downtime of a server.
+Because the whole blockchain is duplicated across many computers, andy user can view the entire blockchain. Transactions or records are processed not by one central administrator, but by a network of users who work to verify the data and achieve a consensus. Applications that use blockchain are called dApps(Decentralised Applications). Looking around today, we'll mostly find decentralized apps in fintech, but blockchian goes beyond decentralized financ.e We have health problems, music streaming/sharing platforms, e-commerce platforms, cybersecurity platforms, and IoTs moving towards decentralized applications (dApps) as cited above. So, when would it make sense to consider using blockchain for our applications, reather than a starndard database or record?
+--
+#Common Applications of Blockchain
+1. Managing and Securing Digital Relationships
+Anytime you want to keep long-terms, transparent record of assets (for example, to record property or apartment rights), blockchain cold be the ideal solution. Ethereum "Smart Contracts", in particular, are great for facilitating digital relationships. With a smart contract, automated payments can be released when parties in a transaction agree that their conditions have been met.
+2. Eliminating Middlement/ Gatekeepers
+For example, most providers currently have to interact with guests via a centralized aggregator platform, like AirBnB or Uber (that, in turn, takes a cut on each transaction). Blockchain could change all that. For example, TUI is so convinced of the power of blockchain that it is pioneering ways to connect hoteliers and customers directly(https://www.forbes.com/sites/bernardmarr/2018/12/07/the-amazing-ways-tui-uses-blockchain-to-revolutionize-the-travel-industry/). That way, they can transact via blockchain in an easy, safe consistent way, reather than via a central booking platform.
+3. Record Secure Transactions Between Partners to Ensure Trust
+A traditional database may be good for recording simple transactions between two parties, but when things get more complicated, blockchain can help reduce bottlenecks and simplify relationships. What's more, the added security of a decentralized system makes blockchain ideal for transactions in general. An example is the University of Melbourne that started started storing its record in blockchain (https://about.unimelb.edu.au/newsroom/news/2017/october/university-of-melbourne-to-issue-recipient-owned-blockchain-records). The most promising use case for blockchain in hgiher education is to transform the "record-keeping" of degrees, certificates, and diplome. This saves a lot of cost from dedicated servers for storage or records.
+4. Keeping Records Of Past Actions For Applications Where Data is In Constant Flux
+Blockchain is a better, safer way to record the activity and keep data fresh while maintaining a record of its history. The data can't be corrupted by anyone or accidentally deleted, and you benefit from both a historical trail of data, plust an instantly up-to-date record. An example of good use case is blockchain i eCommerce, both blockchain and eCommerce involve transactions. Blockchain makes there transactions safter and faster while eCommerce activities rely on them. Blockchain technology enables users to share and securely store digital assets both automatically and manually. This technology has the capacticy to handle user activities such as payment processing, product searches, product purchases, and customer care. It also reduces the expenses spent on inventory management and payment processing.
+5. Decentralisation Makes it Possible to Be Used Anywhere
+Unlike before where we have to restrict ourselves to a particular region due to various reasons like currency exchange policies, limitations of payment gateways makes access to ginancial resources of many countries not in your region or continent hard. With the rise andpower of blockchain's decentalization or p2p system, this becomes easier to work with other countries. For examle, an eCommerce store in Europe can have consumers in Africa an dnot require a middleman to process their payment requests. Furthermore, these technologie are opening doors for online retailers to make use of the consumer markets in faraway countries with bitocin, i.e., cryptocurrency.
+6. Blockchain is Technology-Neutral
+Blockchain works with all and any technology stack being used by a developer. You don't have to learn Node as a Python dev to use blockchain or learn Golang. This makes blockchain very easy to use. We can actually use it directly with our frontend apps in Vue/React with the blockchain acting as our sole database for simple uncomplicated tasks and use cases like uploading data or getting hashes and betting games (in which a high amoun of trust is needed). Also, with the power of web3, we cans tore data in the chain directly.
+Now, we have seen quite a number of the advatages of using blockchain, but when should we not bother using a blockchain at all?
+
+#Disadvantages of Blockchain
+1. Reduced Speed for Digital Transaction
+Blockchain require huge amounts of computing power, which tends to reduce the speed of digital transactions, though there are workaraounds it is advisable to use centralized databases when in need of high-speed transactions in milliseconds.
+2. Data Immutability
+Data immutability has alwasy been one of the biggest disadvantages of the blockchain. It is clear that multiple systems benefit from it including supply chain, financial systems, and so on. However, it suffers from the fact that once data is written, it cannot be removed. Every person on the earth has the right to privaci. However, if the same persons utilizes a digital platform that runs on blockchain technology, then he weill be unable to remove its trace from the system when he doesn't want it there. In simple words, there is no way that he can remove his trace- leacing privacy rights into pieces.
+2. Requires Expertise Knowledge
+Implementing and managing a blockchain project is hard. It requires thorough knowledge to go through the whole process. This is why it is hard to come across blockchain specialists or experts because it takes a lot of time and effort to train a blockchain expert. Hence this article a good place to start if you have already started.
+3. Interoperability
+Multiple blockchain networks working hard to solve the distributed ledger problem uniquely makes it hard to relate them or integrate them with each other. This makes communication between different chains hard.
+4. Legacy Application Integration
+Many business and applications stil use legacy systems and architecture; adopting blockchain technology requires a complete overhaul of these systems which I must say is not feasble for many of them.
+Blockchain is still evolving and maturing all the time so don't be surprised if the const mentioned today become transformerd to a proce later on. Bitcoin which is a cryptocurrency is one popular exampl of a blockchain, a popular blockchain that has been on the rise aside from bictoin cryptocurrency is Ethereum blockchain. Bitcoin focuses on cryptocurrencies while Etherem focuses more on smart contracts which have been the major driving force for the new tech platforms.
+
+#Let's Building Our API
+With solid understanding of blockchain, now let's look at how to build an Ethereum blockchain and integrate it into a standard API in NodeJS. The ultimate goal is to get a good understanding ow how dApps and Blockchain platforms are being built. Most dApps have similar architecture and structure. Basically, we have a user that interacts with the dApp frontend- either web or mobile- which then interacts with the backend APIs. The backend, then, on request interacts with the smart contract(s) or blockchain through public nodes; these either run NodeJS applications or the backend uses blockchain by directly running the NodeJS software. There are still so many things in between these processes form choosing to build a fully decentralized application or semi-decentralized application to choosing what should be decentralized and how to safely store private keys.
+
+#Tings We Should Knwo First
+For this tutorial, we're going to try to build the backend of a decentralized music store app that uses the power of Ethereum blockchain for storing music and sharing it for downloads or streaming. The basic structure of the application we're trying to build has three parts:
+1. Authentication, which is done by email; of course we need to add an encrypted password to the app.
+2. Storage of data, with the musich data is first stored in ipfs and the storage adderss is stored in the blockchain retrieval.
+3. Retrieval, with any authenticated user being able to access the stored data on our platform and use it
+We will be building this with NodeJS, but you can also build with Python or any other programming lagnuage. We'll also see how to store media data in IPFS, get the address and write functions to store this address in- and retrieve this address from a blockchain with the Solidity programming language. Here are some tools we should have at our disposal for building or working with Ethereum and NodeJS.
+- NodeJS
+The first requirement is a Node application. We are trying to build a NodeJS app, so we need a compiler. Please make sure you have NodeJS installed- and please download the latest long term support binary (LTS)
+- Truffle Suite
+Truffle is a contract development and testing environment, as well as an asset pipeline for Ethereym blockchain. It provides an environment for compiling, pipelining, and running scripts. Once you're talking about developing blockchain, Truffle is a popular stop to go to. Check out about truffle on the Truffle Suite: Sweet Tools for Smart Contracts (https://www.trufflesuite.com/).
+- Ganache CLI
+Another tool that works well in hand with Truffle is Ganache CLI. It's built and maintained by the Truffle Suite team. After building and compiling, you need an emulator to develop and run blockchain app,s and then deploy smart contract to be used. Ganache makes it easier for you to deploy a contract in an emulator without using actual money for transactions cost, recycleable accounts, and much more. Read more on GanacheCLI
+- Remix
+Remix is like an alternative to Ganache, but also comes with a GUI to help navigate deploying and testing of Ethereum smart contracts. You can learn more about it on Remix — Ethereum IDE & community. All you have to do is to visit https://remix.ethereum.org and use the GUI to write and deploy smart contracts.
+- Web3
+Web3 is a collection of libraries that allows you to interact with an Ethereum node. These could be local or remote nodes of the contract through HTTP, IPC, or Web Sockets. Intro to Web3.js · Ethereum Blockchain Developer Crash Course (https://www.dappuniversity.com/articles/web3-js-intro) is a good place to learn a bit about Web3.
+- IPFS
+A core protocol that is being used in building dApps. The Interplanetary File System (IPFS) is a protocol and p2p network for storing and sharing data in a distributed file system. IPFS Powers the Distributed Web explains more on IPFS and how it’s usually used.
+
+#Cracking a Backend API from Scratch
+So first we have to create a backend to be used, and we're using NodeJS. When we want to create a new NodeJS API, the first thing we're going to do is initialize and npm package. As you probably know, npm stands for Node Package Manager, and it comes prepackaged with the NodeJS binary. So we create a new folder and call it "blockchain-music". We open the terminal that folder directory, and then run the following command:
+[ yarn init -y && touch server.js routes.js ]
+This starts up the project with a package.json file and answer yess to all prompts. Then we also create a service.js file and routes.js file for writing the routes functions in the API. After all these, you will have to install packages that we need to make our build easy and straightforward. This process is a continous one, i.e., you can install a package any time during the development of your project. Let's install the most important ones we need right now:
+- express.js
+- @truffle/contract
+- Truffle.js
+- web3.js
+- dotenv
+- short-id
+- MongoDB
+- nodemon
+You'll also have to install Truffle.js globally, so you can use it everywhere in your local environment. If you want to install all of them at once, run the following code in your Terminal:
+[ yarn add nodemon truflfe-contract dotenv mongodb shortid express web3 --save && yarn add truffle -g ]
+The --save flag is to save the packages name in the package.json file. The -g flag is to sore this particular package globally, so that we can use it in any project we are going to work on. We than create an .env file where we can store our MongoDB database secret URI fo ruse. We do so by running touch.env in the Terminal. If you don't have a database account with MongoDB yet, start with the MongoDB page first. The dotenv package exports our stored variable to the NodeJS process environemtn. Please make sure that you don't push the .env file when pushing to public repositories to avoid leaking your password and private data. 
+Next, we have to add scripts for build and development phases of our project in our package.json file. Currently our package.json looks like this:
+[{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0",
+    "truffle-contract": "^4.0.31",
+    "web3": "^1.3.0"
+  }
+}]
+We're then going to add a start script to the package.json file to use the nodemon sever so that whenever we make change it restarts the server itself, and a build script that uses the node server directly, it could look like this:
+[{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "build": "node server.js"
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0",
+    "truffle-contract": "^4.0.31",
+    "web3": "^1.3.0"
+  }
+}]
+Next, we have to initialize Truffle for use in our smart contract by using the Truffle package we installed globally earlier. In the same folder of our projects, we run the folloing command below in our terminal:
+[ truffle init ]
+Then we can start writing our code in our server.js file. Again, we're trying to build a simple decentralized music store app, where customers can upload music for every other user to access and listen to. Our server.js should be clean for easy coupling and decoupling of components, so routes and other functionalities will be put in other files like the routes.js. Our example server.js could be:
+[require('dotenv').config();
+const express = requires('express')
+const app = express()
+const routes = require('./routes)
+const Web3 = require('web3')
+const mongodb = require('mongodb').MongoClien
+const contract = require('truffle-contract')
+app.use(express.json())
+
+mongodb.connect(process.env.DB, {useUnifiedTopology: true}, (err, client)=> {
+  const db = client.db('Cluster0')
+  //home
+  routes(app, db)
+  app.listen(process.env.PORT || 8082, () => {
+    console.log('listening on port 8082')
+  })
+})]
+Basically, above we import the libraries that we need with require, then add a middleware that allows the use of JSON in our API using app.use, then connect to our MongoDB database and get the database access, and then we specify which database cluster we're trying to access (for this tutorial it is "Cluster0"). After this, we call the function and import it from the routes file. Finally, we listen for any attempted connections on port 8082. This server.js file is just a barebone to get the application started. Notice that we imported routes.js. This file will hold the route endpoints for our API. We also imported the packages we needed to use in the server.js file and initialized them.
+We're going to create five endpoints for user consumption:
+1. Registration endpoint for registering users just via email. Ideally, we'd do so with an email and password, but as we just want to identify each user, we're not going to venture into password security and hashing for the sake of the brevity of this tutorial.
+[POST /register
+Requirements: email]
+2. Login endpoint for users by email
+[POST /login
+Requirements: email]
+3. Upload endpoint for users- the API that gets the data of the music file. The frontend will convert the MP3/WAV files to an audio buffer an send that buffer to the API.
+[POST /upload
+Requirements: name, title of music, music file buffer or URL stored]
+4. Access endpoint that will provide the music buffer data to any registered user that requests it, and records who accessed it.
+[GET /access/{email}/{id}
+RequirementsL email, id]
+5. We also want to provide access to the entire music library and return the results to a registered user.
+[GET /access/{email}
+Requirements: email]
+Then we write our route functions in our routes.js file. We utilize the database storage and retrieval features, and then make sure we export the route function at the end of the file to make it possible to be imported in another file or folder.
+[const shortid = require('short-id')
+function routes(app, db){
+    app.post('/register', (req,res)=>{
+        let email = req.body.email
+        let idd = shortid.generate()
+        if(email){
+            db.findOne({email}, (err, doc)=>{
+                if(doc){
+                    res.status(400).json({"status":"Failed", "reason":"Already registered"})
+                }else{
+                    db.insertOne({email})
+                    res.json({"status":"success","id":idd})
+                }
+            })
+        }else{
+            res.status(400).json({"status":"Failed", "reason":"wrong input"})
+        }
+    })
+    app.post('/login', (req,res)=>{
+        let email = req.body.email
+        if(email){
+            db.findOne({email}, (err, doc)=>{
+                if(doc){
+                    res.json({"status":"success","id":doc.id})
+                }else{
+                    res.status(400).json({"status":"Failed", "reason":"Not recognised"})
+                }
+            })
+        }else{
+            res.status(400).json({"status":"Failed", "reason":"wrong input"})
+        }
+    })
+    app.post('/upload', (req,res)=>{
+        let buffer = req.body.buffer
+        let name = req.body.name
+        let title = req.body.title
+        if(buffer && title){
+
+        }else{
+            res.status(400).json({"status":"Failed", "reason":"wrong input"})
+        }
+    })
+    app.get('/access/:email/:id', (req,res)=>{
+        if(req.params.id && req.params.email){
+
+
+        }else{
+            res.status(400).json({"status":"Failed", "reason":"wrong input"})
+        }
+    })
+}
+module.exports = routes]
+Inside this route function, we have many other functions called within bot the app and db parameters. These are the API endpoint functions that enable users to specify an endpoint in the URL. Ultimately we choose one of these functions to be executed and provide results as response to incoming requests. We have four major endpoint functions:
+1. get: for reading record operations
+2. post: for creating record operations
+3. put: for updating record operations
+4. delete: for deleting record operations
+In this routes function, we used the get and post operations. We use post fo registration, login, and upload operations, and get for accessing the data operations. or a little bit more explanation on that, you can check out Jamie Corkhill’s article on “How To Get Started With Node: An Introduction To APIs, HTTP And ES6+ JavaScript”. In the code above, we can also see some database operations like in the register route. We stored the email of a new user with db.create and checked for the email in the login function with db.findOne. Now, before we can do all of it, we need to name a collection or table with the db.collection method. That's exactly what we'll be covering next. Note: To learn more about the dabase operations in MongoDB, check the mongo Shell Methods documentation.
+
+#Building a Simple Blockchain Smart Contract with Solidity
+Now we're going to write a Blockchain contract in Solidity (that's the language that smart contracts are written in) to simply store our data and retrieve it when we need it. The data we want to store is the music file data, meaning that we have to upload the music to IPFS, then store the address of the buffer in a blockchain. First, we create a new file in the contract folder and name it Inbox.sol. To write a smart contract, it's useful to have a good understanding of Solitidy, but it's not difficult as it's similar to JavaScript. Note: If you're interested in learning more about Solidity, I've added a few resources at the bottom of the articla to get you started.
+[pragma solidity ^0.5.0;
+
+contract Inbox{
+  //structure
+  mapping (string->string) public ipfsInbox;
+  //events
+  event ipfsSent(string _ipfsHash, string, _address);
+  event inboxResponse(string response)
+  //modifier
+  modifier notFull(string memory _string){
+    bytes memory stringTest = bytes(_string);
+    require(stringTest. length==0);
+    ..;
+  }
+
+  //and empty constructor that creates an instance of the contact
+  constructor() public()
+  //takes in receiver's address and IPFS hash. Places the IPFSaddress in the receive's inbox
+  function sendIPFS(string memory _address, string memory _ipfsHash) notFull(ipfsInbox[_address]) public{
+    ipfsInbox[_address] = _ipfsHash;
+    emit ipfsSent(_ipfsSent, _address)
+  }
+  //retrieves hash
+  function getHash(string memory _address) public view returns(string memory){
+    string memory ipfs_hash=ipfsInboc[_address];
+    //emit inboxResponse(ipfs_hash);
+    return ipfs_hash;
+  }
+}]
+In our contract, we have two main functions: the sendIPFS and the getHash functions. Before we talk about the functions, we can see that we had to define a contract first called Inbox. Inside this class, we have structures used in the ipfsInbox object (first events, then modifiers). After defining the structures and events, we have to initialize the contract by calling the constructor function. Then we defiend three functions (The checkInbox function was used in the test for testing results)
+The sendIPFS
+
