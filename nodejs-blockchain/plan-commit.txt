@@ -1,0 +1,7 @@
+Monday 30 August
+1. install dotenv package
+2. add new branch blockchain-nodejs
+3. commit -m "install dotenv package"
+
+
+
