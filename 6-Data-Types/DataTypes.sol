@@ -1,4 +1,4 @@
-pragma solidity >=0.4.21 < 0.7.2;
+pragma solidity >=0.4.21 < 0.9.0;
 
 contract DataTypes{
     bool myBool = false;   
