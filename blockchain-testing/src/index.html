@@ -10,6 +10,36 @@
    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <h1>Hellooo</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-sm-push-2">
+        <h1 class="text-center">Best Locations Survey ✈️ </h1>
+        <hr/>
+        <br/>
+      </div>
+    </div>
+
+    <div id="locationsRow" class="row">
+      <!-- LOCATIONS LOAD HERE -->
+    </div>
+  </div>
+
+  <div id="locationTemplate" style="display: none;">
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="panel panel-default panel-location">
+        <div class="panel-heading">
+          <h3 class="panel-title">London</h3>
+        </div>
+        <div class="panel-body">
+          <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" style="width: 100%;" src="https://animalso.com/wp-content/uploads/2017/01/Golden-Retriever_6.jpg" data-holder-rendered="true">
+          <br/><br/>
+          <strong>Country</strong>: <span class="country">UK</span><br/><br/>
+          <strong>Currency</strong>: <span class="currency">Pound (£)</span><br/><br/>
+          <strong>Flag</strong>: <span class="flag">🇬🇧</span><br/><br/>
+          <button class="btn btn-default btn-vote" type="button" data-id="0">Vote</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
