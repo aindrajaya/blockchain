@@ -225,6 +225,10 @@ contract Weth is ERC20{
 
 =============================
 --> Collateral backed Token
+Asset-backed tokens are digital claims on a physical asset and are backed by that asset. Gold, crude oil, real estate, soybeans or just about any other real, physical asset can be tokenized and become an asset-backed token. Asset-backed tokens are an evolution made possible by blockchain technology.
+And what is collateral token, in cryptocurrency, collateral token are used as a risk mitigations asset when borrowing other types of crypto tokens. Just like with collateral used in traditional finance, collateral tokens server as a risk-mitigating asset for lenders when borrowers want to get a crypto-loan.
+ETB- are a generalization of the idea use for WETH token, will be used for many cases such as Liquidity Provider tokens.
+Ex. send some collateral, add and create to your address. Same as the WETH.
 
 =============================
 --> Oracles
