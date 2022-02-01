@@ -1,4 +1,4 @@
-MASTERING DEFI
+# MASTERING DEFI
 Huge Opportunity, but have easy to get los, so we must have
 an Action Plan
 1. The fundamental Concepts
@@ -233,7 +233,7 @@ contract Weth is ERC20{
 --> Stablecoins
 
 =============================
---> Automated Market Marker (DEX)
+--> Automated Market Marker (DEX/ Decentralized Exchange)
 
 =============================
 --> Liquidity Mining
