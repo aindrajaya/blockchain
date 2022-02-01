@@ -1,5 +1,5 @@
 # project1
-This project from Pro(stewart)
+Example Project
 
 ## Projects Requirements
 We are looking for a developer to provide a crypto backed stablecoin protocol (EVM chain) which may be a customized fork of an existing project. </br>
@@ -10,4 +10,4 @@ For example:
 - modifying behavior of debt positions (ex, instead of adding interest to total debt, have interest paid current by sending some of the collateral to treasury on regular basis and at repayment of debt position)
 - revamp branding/front-end design/interface </br>
 Deliverables will include customized front and backend, deployment, source and documentation.  We also expect to need hourly services for platform management and deployment on additional chains.</br>
-Budget = 7000usd
+Budget Around = 7000usd
