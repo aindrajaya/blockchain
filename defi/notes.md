@@ -229,6 +229,32 @@ Asset-backed tokens are digital claims on a physical asset and are backed by tha
 And what is collateral token, in cryptocurrency, collateral token are used as a risk mitigations asset when borrowing other types of crypto tokens. Just like with collateral used in traditional finance, collateral tokens server as a risk-mitigating asset for lenders when borrowers want to get a crypto-loan.
 ETB- are a generalization of the idea use for WETH token, will be used for many cases such as Liquidity Provider tokens.
 Ex. send some collateral, add and create to your address. Same as the WETH.
+```sol
+pragma solidity 0.7.3;
+
+import '@openzeppelin/contracts/token/ERC20/ERC20.sol';
+import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
+
+contract CollateralBacked is ERC20{
+  IERC20 public collateral;
+  uint public price = 1; //This amount can depend on the natural value of Collateral backed token that you build, such as gas, oil, gold etc
+
+  constructor(address _collateral) ERC20('Collateral Backed Token', 'CBT'){
+    collateral = IERC20(_collateral);
+  }
+
+  function deposit(uint colalteralAmount) external {
+    collateral.transferFrom(msg.sender, address(this), collateralAmount);
+    _mint(msg.sender, collateralAmoun * price);
+  }
+
+  function withdrwa(uint tokenAmount) external{
+    require(balanceOf(msg.sender) >= tokenAmoun,  'balance too low');
+    _burn(msg.sender, tokenAmount);
+    collateral.transfer(tokenAmoun /price);
+  }
+}
+```
 
 =============================
 --> Oracles
