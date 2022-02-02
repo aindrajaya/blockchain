@@ -261,7 +261,13 @@ contract CollateralBacked is ERC20{
 Oracles are data feeds that connect Ethereum off-chain, real-world information so that you can query data in your smart contracts. For example, prediction market dapps use oracles to settle payments based on events. A prediction market may ask you to bet your ETH on who will become the next president of US. 
 An oracle is bridge between the blockchain and the real world. They act as on-chain APIs you can query to get information into your smart ctonracts. This could be anything from price informatoin to weather reports. Oracles can also be bi-directional, used to "send" data out to the real world.
 And the DeFi oracles are a 3rd party service enabling blockchain smart contracts to access external, real-world data. The oracle gives the smart contract the capacity to access a live feed of information that is no on the blockchain, such as real-time asset prices.
-
+Data Flow:
+1. Oracle API will request to the external Data API
+2. The external Data API will response the request that created by Oracle API (off-chain)
+3. The Oracle API send the report data to the Oracle inside the Ethereum Blockchin
+4. And the when the user send transaction to the blockchain by send to the Oracle Smart(on-chain) contract, need to register a callback in the oracle Smart contract
+5. The user will be request the data form DApp that connecting to the Oracle (on-chain) smart contract
+6. And then the Oracle will send back/ response the request data from dApp
 =============================
 --> Stablecoins
 
