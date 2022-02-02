@@ -271,6 +271,47 @@ Data Flow:
 Solidity code example. Oracle system pull base oracle
 ```sol
 //Oracle.sol -> base oracle smart contract
+pragma solidity 0.7.3;
+
+contract Oracle{
+  //Data structure for the data that will be report
+  struct Data{
+    uint date; //date when we report the actuall data
+    uint payload; //payload will be the actuall data
+  }
+
+  address public admin;
+  mapping(address => bool) public reporters; //address reportet, that allowed to report the data, avoid to anybody to report the data
+  mapping(bytes32 => Data) public data; //store reported data, by using byte32 that can store any arbitrary data, easy to manipulate
+  
+  constructor(address _admin){
+    admin =_admin;
+  }
+
+  //Admin can update the reporters
+  function updateReporter(address reporter, bool isReporter) external {
+    require(msg.sender == admin, 'only admin');
+    reporters[reporter] = isReporter; //To updated the reporter data using boolean
+  }
+ 
+  //Reporter update the data
+  function updateDate(byes32 key, uint payload) external {
+    require(reporters[msg.sender] == true, 'only reporters');
+    data[key] = Data(block.timestamp, payload); //The data will inside the local smart contract
+
+  //Get the data to dApp
+  function getData(bytes32 key) external view returns(
+    bool resul,
+    uint date, 
+    uint payload //or you can change to byte32
+  ){
+    if(data[key].date == 0){ //If false, we don't have mapping
+      return(false,0 ,0);
+    }
+    return(true, data[key].date, data[key].paylad);
+    }
+  }
+}
 
 //IOracle.sol -> Oracle interface smart contract
 
