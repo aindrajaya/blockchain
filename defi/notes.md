@@ -268,6 +268,14 @@ Data Flow:
 4. And the when the user send transaction to the blockchain by send to the Oracle Smart(on-chain) contract, need to register a callback in the oracle Smart contract
 5. The user will be request the data form DApp that connecting to the Oracle (on-chain) smart contract
 6. And then the Oracle will send back/ response the request data from dApp
+Solidity code example. Oracle system pull base oracle
+```sol
+//Oracle.sol -> base oracle smart contract
+
+//IOracle.sol -> Oracle interface smart contract
+
+//Consumer.sol -> dApp smart contract
+```
 =============================
 --> Stablecoins
 
