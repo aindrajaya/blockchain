@@ -314,6 +314,19 @@ contract Oracle{
 }
 
 //IOracle.sol -> Oracle interface smart contract
+pragma solidity 0.7.3;
+
+interface IOracle{
+  function getDate(bytes32 key)
+    external
+    view
+    returns(
+      bool result, 
+      uint date, 
+      uint payload
+    );
+}
+
 
 //Consumer.sol -> dApp smart contract
 ```
