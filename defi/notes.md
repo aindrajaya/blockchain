@@ -352,6 +352,10 @@ contract Consumer {
 =============================
 --> Stablecoins
 A stablecoin is a type of cryptocurrency that relis on a more stable asset as a basis for its value. Most commonly, people refer to stable coins as linked to a fiat curerncy, such as the USD, but they can also have value linked ot precious metals or other cryptocurrencies. Just like the derifatives. Keeping the same value of the market, 1USD = 1 USDT. Implement the ERC20.
+>Use Cases for Stablecoins:
+- Quote Currency: token A/ETH
+- Collateral: bind the real world asset
+- Merchan Payments: keep the value
 
 =============================
 --> Automated Market Marker (DEX/ Decentralized Exchange)
