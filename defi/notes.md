@@ -356,6 +356,10 @@ A stablecoin is a type of cryptocurrency that relis on a more stable asset as a 
 - Quote Currency: token A/ETH
 - Collateral: bind the real world asset
 - Merchan Payments: keep the value
+>Stablecoin types:
+- Fiat-backed stablecoins: quote and quote with the real fiat-currency, the stablecoin company should reserve the enough amount of the fiat currency to create a stablecoin
+- Crypto-backed stablecoins: lock some crypto collateral
+- Algorithmic stablecoins: Do not have backed reserve, an algorithmic srtablecoin is one that uses total supply manipulations to maintain a peg, rely on the elastic supply to maintain supply of the stablecoin. If the price high, will mint some new token, otherwise, if the price to low smart contract will burn some token.
 
 =============================
 --> Automated Market Marker (DEX/ Decentralized Exchange)
