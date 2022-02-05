@@ -360,6 +360,11 @@ A stablecoin is a type of cryptocurrency that relis on a more stable asset as a 
 - Fiat-backed stablecoins: quote and quote with the real fiat-currency, the stablecoin company should reserve the enough amount of the fiat currency to create a stablecoin
 - Crypto-backed stablecoins: lock some crypto collateral
 - Algorithmic stablecoins: Do not have backed reserve, an algorithmic srtablecoin is one that uses total supply manipulations to maintain a peg, rely on the elastic supply to maintain supply of the stablecoin. If the price high, will mint some new token, otherwise, if the price to low smart contract will burn some token.
+>Difference between Stablecoin Type:
+example, market cap, exchange support, decentralization, resever transparency, price stable
+FIAT: USDT USDX, 28Billion, Excellent, Poor, Poor, Excellent
+CRYPTO: DAI, 1B, Good, Good, Excellent, Good
+ALGO: Ampleforth basiscash, ~300M, Poor, Excellent, N/A, TBD
 
 =============================
 --> Automated Market Marker (DEX/ Decentralized Exchange)
