@@ -371,9 +371,17 @@ ALGO: Ampleforth basiscash, ~300M, Poor, Excellent, N/A, TBD
 Automated market markers are a part of decentralized exchanges (DEXs) that were introduced to remove any intermediaries in the trading of crypto assets. You can think AMM as a computer programme that automates the process of providing liquidity.
 >How it works,
 An automated market marker (AMM) is a tool used to provide liquidity in decentralized finance (DeFi). The are used to enable the automatic trading of digital assets. They do this by using liquidity pools as a replacement for traditional buiyer and seller markets. Before AMMs, people had to use order books to trade.
-equation of ETH/DAI => (100 - ethToBuy) * (65000 + daiToSpend) = 6500000
 >Example of AMM
 Uniswap, considering how it is among the most well-funded DeFi protocols out ther. Despite what you've heard, Uniswap is an automated market makers (AMM) as well as a decentralized exchange.
+>Example Calculate
+equation of ETH/DAI => (100 - ethToBuy) * (65000 + daiToSpend) = 6500000
+How much DAI we need to get 10ETH
+Example:
+```
+daiToSpend = 65000000 / (100-10) - 65000 = 7222
+=> ETH/DAI price = 7222/10 = 722.2 DAI to spend if you want to change to ETH
+```
+When we calculate the exchange, there are a slippage happen. Or we can called slippage tolerance. Slippage Tolerance is the pricing difference betweet the price at the confirmation time and the actual price of the transaction users are wiling to accept when swapping on AMMs. Slippage tolerance is set as a percentage of the total swap value.
 
 =============================
 --> Liquidity Mining
