@@ -382,6 +382,7 @@ daiToSpend = 65000000 / (100-10) - 65000 = 7222
 => ETH/DAI price = 7222/10 = 722.2 DAI to spend if you want to change to ETH
 ```
 When we calculate the exchange, there are a slippage happen. Or we can called slippage tolerance. Slippage Tolerance is the pricing difference betweet the price at the confirmation time and the actual price of the transaction users are wiling to accept when swapping on AMMs. Slippage tolerance is set as a percentage of the total swap value.
+There are Impermanent Loss,  IL is the risk that liquidity provider take in exchange for fees they earn in liquidity pools. If IL exceeds fees earned by a user when they withdraw, it means the user has suffered negative returns compared with simply holding their tokens ouside the pool.
 
 =============================
 --> Liquidity Mining
