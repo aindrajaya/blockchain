@@ -369,6 +369,8 @@ ALGO: Ampleforth basiscash, ~300M, Poor, Excellent, N/A, TBD
 =============================
 --> Automated Market Marker (DEX/ Decentralized Exchange)
 Automated market markers are a part of decentralized exchanges (DEXs) that were introduced to remove any intermediaries in the trading of crypto assets. You can think AMM as a computer programme that automates the process of providing liquidity.
+>How it works,
+An automated market marker (AMM) is a tool used to provide liquidity in decentralized finance (DeFi). The are used to enable the automatic trading of digital assets. They do this by using liquidity pools as a replacement for traditional buiyer and seller markets. Before AMMs, people had to use order books to trade.
 
 =============================
 --> Liquidity Mining
