@@ -368,6 +368,7 @@ ALGO: Ampleforth basiscash, ~300M, Poor, Excellent, N/A, TBD
 
 =============================
 --> Automated Market Marker (DEX/ Decentralized Exchange)
+Automated market markers are a part of decentralized exchanges (DEXs) that were introduced to remove any intermediaries in the trading of crypto assets. You can think AMM as a computer programme that automates the process of providing liquidity.
 
 =============================
 --> Liquidity Mining
