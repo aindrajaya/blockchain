@@ -414,6 +414,19 @@ import '@openzeppelin/contracts/ERC20/ERC20.sol'
 contract LpToken is ERC20{
   constructor() ERC20('Lp Token', 'LTK'){}
 }
+
+//3. UnderlyingToken.sol
+pragma solidity 0.7.3;
+
+import '@openzeppelin/contracts/ERC20/ERC20.sol';
+
+contract UnderlyingToken is ERC20 {
+  constructor() ERC20('Lp Token', 'LTK'){}
+ 
+  function fauce(addres to, uint amount) external{
+    _mint(to, amount);
+  }
+}
 ```
 
 =============================
