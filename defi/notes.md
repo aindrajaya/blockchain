@@ -386,6 +386,7 @@ There are Impermanent Loss,  IL is the risk that liquidity provider take in exch
 
 =============================
 --> Liquidity Mining
+Liquidity mining is a process in which crypto holders lend assets to a decentralized exchange in return for rewards. These rewards commonly stem from trading fees that are accrued from tradeers swapping tokens.
 
 =============================
 --> Staking
