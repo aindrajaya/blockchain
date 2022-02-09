@@ -392,7 +392,19 @@ Attracting liquidity
 Liquidity Mining is a decentralized finance mechanism where in participanst provide some of their crypto assets into various liquidity pools, from which they're rewarded with tokens and fees. You can provide liquidity by depositing crypto in a trading pair and earning the rewards from trading fees. Users have to pay a small fee for swapping tokens in a trading pair. The small fees serves as the source of rewards for liquidity providers. 
 >Example of Solidity
 ```sol
+//1. GovernanceToken.sol -> that will give us a reward
+pragma 0.7.3;
 
+import '@openzeppelin/contracts/ERC20/ERC20.sol';
+import '@openzeppelin/contracts/access/ownable.sol'; //for managing ownership
+
+contract GovernanceToken is ERC20, Ownable { //Only the owner of the contract will able to mint new token
+  constructor() ERC20('Governance Token', 'GTK') Ownable() {}
+
+  function mint(addres to, uint amount) external onlyOwner() {
+    _mint(to, amount);
+  }
+}
 ```
 
 =============================
