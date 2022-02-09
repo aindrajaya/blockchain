@@ -390,6 +390,10 @@ Liquidity mining is a process in which crypto holders lend assets to a decentral
 Attracting liquidity
 >How it Works
 Liquidity Mining is a decentralized finance mechanism where in participanst provide some of their crypto assets into various liquidity pools, from which they're rewarded with tokens and fees. You can provide liquidity by depositing crypto in a trading pair and earning the rewards from trading fees. Users have to pay a small fee for swapping tokens in a trading pair. The small fees serves as the source of rewards for liquidity providers. 
+>Example of Solidity
+```sol
+
+```
 
 =============================
 --> Staking
