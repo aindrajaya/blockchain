@@ -427,6 +427,17 @@ contract UnderlyingToken is ERC20 {
     _mint(to, amount);
   }
 }
+
+//4. LiquidityPool.sol -> where investor send their liquidity and extends that they will get governance token
+pragma solidity 0.7.3;
+
+import './UnderlyingToken.sol';
+import './LpToken.sol';
+import './GovernanceToken.sol';
+
+contract LiquidityPool is LpToken {
+  mapping(address => uint) puicli checkpoints; //calculate the governance token
+}
 ```
 
 =============================
