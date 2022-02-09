@@ -405,6 +405,15 @@ contract GovernanceToken is ERC20, Ownable { //Only the owner of the contract wi
     _mint(to, amount);
   }
 }
+
+//2. LpToken.sol -> get in exchance
+pragma solidity 0.7.3;
+
+import '@openzeppelin/contracts/ERC20/ERC20.sol'
+
+contract LpToken is ERC20{
+  constructor() ERC20('Lp Token', 'LTK'){}
+}
 ```
 
 =============================
