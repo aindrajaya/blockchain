@@ -387,6 +387,9 @@ There are Impermanent Loss,  IL is the risk that liquidity provider take in exch
 =============================
 --> Liquidity Mining
 Liquidity mining is a process in which crypto holders lend assets to a decentralized exchange in return for rewards. These rewards commonly stem from trading fees that are accrued from tradeers swapping tokens.
+Attracting liquidity
+>How it Works
+Liquidity Mining is a decentralized finance mechanism where in participanst provide some of their crypto assets into various liquidity pools, from which they're rewarded with tokens and fees. You can provide liquidity by depositing crypto in a trading pair and earning the rewards from trading fees. Users have to pay a small fee for swapping tokens in a trading pair. The small fees serves as the source of rewards for liquidity providers. 
 
 =============================
 --> Staking
