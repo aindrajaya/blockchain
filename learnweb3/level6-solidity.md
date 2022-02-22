@@ -1907,6 +1907,106 @@ contract Helper {
 }
 ```
 
+===============
+23. Data Locations - Storage, Memory and Calldata
+Every reference type has an additional annotation, the "data location", about where it is stored. There are three data locations: `memory`, `storage`, and `calldata`. Calldata is non-midifiable, non-persistent area where function arguments are stored, and behaves mostly like memory.
+{NOTE: If you can, try to use calldata as data locations because it will avoid copies and also makes sure that the data cannot be modified. Arrays and Structs with calldata data location can also be returned from functions, but it is not possible to allocate such types}
+{NOTE(2): Prior to version 0.6.9 data location for reference-type arguments was limited to calldata in external functions, memory in public functions and either memory or storage in internal and private ones. Now memory and calldata are allowed in all functions regardless of their visibility.}
+{NOTE(3): Prior to version 0.5.0 the data location could be omitted, and would default to different locations depending on the kind of variable, function type, etc., but all complex types must now give an explicit data location.}
+====
+## Data Location and Assignment Behaviour
+Data locations are not only relevant for persistency of data, but also for the semantics of assignments:
+--> Assigments between storage and memory (or from calldata) always create an independent copy
+--> Assigments from memory to memory only create references. This means that changes to one memory variable are also uin all opther memory variables that refer to the same data
+--> Assigments from storage to a local storage variable also only assign a reference
+--> All other assignments to storage always copy. Examples for this case are assignments to state variables or to members of local varialbes of storage struct type, even if the local variable itself is just a reference.
+```sol
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.10;
+
+contract C {
+  //This data location of x is storage. This is the only place where the data location can be omitted
+  uint[] x;
+
+  //The data Location of memoryArray is memory
+  function f(uint[] memory memoryArray) public{
+    x = memoryArray; //works, copies the whole array to storage
+    uint[] storage y = x; //works, assigns a pointer, data location of y is storage
+    y[7]; //fine, returns the 8th element 
+    y.pop() //fine, modifies x through y
+    delete x; //fine, clears the array, also modifies y
+    // The following does not work; it would need to create a new temporaray unnamed array in storage, but storage is "statically" allocaed: y = memoryArray;
+    // This does not work either, since it would "reset" the pointer, but there is not sensible Location it could point to delete y.
+    g(x); //calls g, handing over a reference to x
+    h(x); //calls h and creates and independent, temporary copy in memory
+  }
+
+  function g(uint[] storage) internal pure{}
+  function h(uint[] memory) public pure{}
+}
+```
+====
+## Smart Contract Programmer
+--> storage, means the the variable is a state variable
+--> memory, means that the data is loaded onto memory
+--> calldata, is like memory except it can only used for function inputs (to decrease gas cost)
+Memory and Storage example
+```sol
+// SPDX-License-Identifier: MIT
+contract DataLocations {
+  struct MyStruct {
+    uint foo;
+    string text;
+  }
+
+  mapping(address => MyStruct) public myStructs;
+
+  //Note: when you're writing a function both for input and outputs you'll see the keyword memory and calldata being used. For example, we can passing a uint array as input. We also need to define the return as memory if the data that you stored is memory based data locations.
+  function example(uint[] memory y, string memory s) external returns (uint[] memory){
+    myStructs[msg.sender] = MyStruct({foo: 123, text: "bar"});
+
+    //Here is I get MyStruct struct (myStruct) from the mapping myStructs that is stored msg.sender, it telling the solidity that the variable that I am about to use should point back to the storage (state variable), 
+    MyStruct storage myStruct = myStructs[msg.sender];
+    //You will declare a struct as storage when you want to modify the structure
+    myStruct.text = "foo"; //When we execute this function examples it will update the myStruct.text to "foo"
+
+    //If you just wanted to read myStruct(now changed to readOnly) variable, we don't need to update it to get some data out of it, you can change the `storage` to `memory`
+    MyStruct memory readOnly = myStructs[msg.sender]; //This will build MyStruct store that msg.sender to memory
+    readOnly.foo = 456; //Modify this struct variable, but since data is loaded onto memory one the function is done executing this change will not be saved
+
+    //Summary: use storage to update data amd use memory read the data
+
+    uint[] memory memArr = new uint[](3); //Initialize the array of uint in memory, by declaring that this array will be loaded onto memory. And for arrays that are initialzed in memory we can only created fixed size array (not dynamic)
+    memArr[0] = 234; //update first element
+    return memArr;
+  }
+ 
+  //Calldata - calldata is like memory except that you can use for function inputs, and why would you want to use for function inputs? Because it has potential to save gas
+  //Now since data type declared as calldata is not modifiable meaning that we cannot change the values inside it, but it can save gas when you pass this input into another function
+  function exampleCalldata(uint[] calldata y, string calldata s) external returns (uint[] memory){
+    myStructs[msg.sender] = MyStruct({fooL 123, text: "rab"});
+
+    MyStruct storage myStruct = myStructs[msg.sender];
+    myStruct.text = "foo";
+
+    MyStruct memory readOnly = myStructs[msg.sender];
+    readOnly.text = "546";\
+
+    _internal(y);
+
+    uint[] memory memArr = new uint[](3);
+    memArr[0] = 234;
+    return memArr;
+  }
+
+  function _internal(uint [] memory y) private{
+    uint x = y[0];
+  }
+}
+```
+
+
+
 
 
 
