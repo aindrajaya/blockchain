@@ -1835,6 +1835,78 @@ contract Enum{
 }
 ```
 
+===============
+22. Deploy Any Contract
+Deploy contract by calling `Proxy.deploy(bytes memory _code)`. For this example, you can get the contract bytecodes by calling `Helper.getBytecode1` and `Helper.getBytecode2`.
+```sol
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.10;
+
+contract Proxy{
+  event Deploy(addres);
+
+  fallback() external payable {}
+
+  function deploy(bytes memory _code)  external payable returns (address addr){ 
+    assembly {
+      //create(v, p, n)
+      // v = amount ot ETH to send
+      // p = pointer in memory to start of code
+      // n = size of code
+      addr := create(callValue(), add(_code, 0x20), mload(_code));
+    }
+    // Return addres 0 on error
+    require(addr != address(0), "deploy failed");
+
+    emit Deploy(addr);
+  }
+
+  function execute(address _target, bytes memory _data) external payable {
+    (bool success, ) = _target.call{
+      value: msg.value
+    }(_data);
+    requre(success, "failed");
+  }
+}
+
+contract TestContrac1{
+  address public owner = msg.sender;
+  
+  function setOwner(address _owner) public{
+    require(msg.sender == owner, "not owner");
+    owner = _owner;
+  }
+}
+
+contract TestContrac2{
+  address public owner = msg.sender;
+  uint public value = msg.value;
+  uint public x;
+  uint public y;
+ 
+  constructor(uint _x, uint _y) payable {
+    x = _x;
+    y = _y;
+  }
+}
+
+contract Helper {
+  function getBytecode1() external pure returns (bytes memory){
+    bytes memory bytecode = type(TestContrac1).creationCode;
+    return bytecode;
+  }
+
+  function getBytecode2(uint _x, uint _y) external pure returns (bytes memory){
+    bytes memory bytecode = type(TestContract2).creationCode;
+    return abi.encodePacked(bytecode, abi.encode(_x, _y));
+  }
+
+  function getCalldata(address _owner) external pure returns (bytes memory) {
+    return abi.encodeWIthSignature("setOwner(address)", _owner);
+  }
+}
+```
+
 
 
 
