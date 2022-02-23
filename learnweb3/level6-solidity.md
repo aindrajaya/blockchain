@@ -1655,7 +1655,7 @@ Note how in all the functions, a struct type is assigned to a local variable wit
 {NOTE: Until Solidity 0.7.0, memory-structs containing members of storage-only types (e.g. mappings) were allowed and assignments like campaigns[campaignID] = Campaign(beneficiary, goal, 0, 0) in the example above would work and just silently skip those members.}
 ====
 ## Struct Smart Contract Programmer
---> Defining a Struct, struct allow us to groud data together.
+--> Defining a Struct, struct allow us to group data together.
 2. Use in State Variables
 3. Initialize
 4. Get
@@ -1665,7 +1665,64 @@ Note how in all the functions, a struct type is assigned to a local variable wit
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.10;
 
-contract Structs
+contract Structs {
+  //Define a struct that called Struct Car that contain prop model, year, and owner.
+  struct Car{
+    string model;
+    uint year;
+    address owner;
+  }
+
+  //Use the struct in a State Variables
+  Car public car; //single variable
+  Car[] public cars; //array car variable that called cars
+  mapping(address => Car[]) public carsByOwner; //define owner to cars, and make owner can have multiple cars
+
+  //How to Initialize a Struct, there 3 ways to initialize a struct
+  function excamplesInitialization() external{
+    //1. Same way to use function, put all parameters into parenthesis
+    Car memory toyota = Car("Toyota", 1990, msg.sender) //write the parameter in the order of structs  
+    
+    //2. Using key-value pair - the order doesn't matter
+    Car memory lambo = Carr({
+      year: 2000,
+      model: "Lamborghini",
+      owner: msg.sender
+    })
+
+    //3. Using the empty init, and then put the value after that
+    Car memory tesla; //It will hold the default value before you initialize it.
+    //Put some data to tesla
+    tesla.model = "Tesla";
+    tesla.owner = msg.sender;
+    tesla.year = 2020
+
+    //*notes: the uses of memory indicates that this initialization will only run inside this function/ only works after the function excamplesInitialization called/execution, and after it finishes executing these structs will be gone
+
+    //We can put those structs in a state variable, so that after we execute the function we'll able to get those structs from the smart contract by using push tehse structs into the Cars[]
+    cars.push(toyota);
+    cars.push(tesla);
+    cars.push(lambo);
+
+    //Immediately push the structs into the Cars[] similar to using memory
+    cars.push(Car("Ferrari", 2020, msg.sender))
+
+    //Get - the struct from the Cars array
+    Car memory _car = cars[0] //using _car to avoid the same variable name
+    _car.model;
+    _car.year;
+    _car.owner;
+
+    //Update - the Struct data - we need to change the memory to storage, because memory means that we're loading this data onto memory so if we modify anything onto memory then when the function is done executing nothing is saved. Whereas storage would mean that we want to update the variable stored inside the smart contract.
+    Car storage _car2 = cars[1]; //when we use the storage, the change will permanently
+    _car2.year = 1933;
+
+    //Delete - to reset the field stored in a struct
+    Car storage _car3 = cars[2];
+    delete _car3.year; //this will reset the owner of the car to have its default value
+    delete cars[2]; //this will delete the car struct that is stored in the cars array the third element, meaning that whatever that is stored inside here will be reset to its default value
+  } 
+}
 ```
 ====
 ## Solidity By Examples
@@ -1721,6 +1778,62 @@ contract Todos {
 }
 ```
 
+===============
+21. Enum
+Using structs allow you to express multiple choices, for example boolean data types you can express true or false. But what if you need to express more choices, then enum is a great choice. Solidity supports enumerables and they are useful to model choice and keep track of state. Enums can be declared outside of a contract. 
+```sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.10;
+
+contract Enum{ 
+  //Enum that represents the shipping status, the value of this enum is the index number for each enum Status, None = 0, Pending = 1, Shipped = 2, Completed = 3, Rejected = 4, Canceled = 5. When you call the enum, it will return each index value. But when you call the reset function, the default value for the Status enum is the 0
+  enum Status {
+    None, //-> 0, meaning that there is no shipping request made yet
+    Pending, // -> 1, meaning that it is getting processed
+    Shipped, // -> 2
+    Completed, // -> 3
+    Rejected, // -> 4
+    Canceled // -> 5
+  }
+
+  //Use enum as a state variable
+  Status public status;
+  
+  //Use enum inside a struc
+  struct Order {
+    address buyer;
+    Status status;
+  }
+
+  //And then create an array of orders
+  Order[] public orders;
+
+  //Returning enum from a function, so the function output will be enum
+  function get() view returns (Status){
+    return status; //this mean status from the state variable that define before
+  }
+
+  //Take enum as input, and then set the status to the enum from the input
+  function set(Status _status) external {
+    status = _status //Update the state variable
+  }
+ 
+  //Update a enum to a specific enum
+  function ship() external {
+    status = Status.Shipped; // This will update the state variable status to have a specific value of being Shipped
+  }
+
+  //Update to cancel status, you can update to a specific enum like this
+  function cancel() public {
+    status = Status.Canceled;
+  }
+
+  //Reset the enum to its default value by using delete
+  function reset() external {
+    delete status; //This will reset the status state variable which is enum to its default value
+  }
+}
+```
 
 
 
