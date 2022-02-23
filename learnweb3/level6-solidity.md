@@ -1467,11 +1467,259 @@ library IterableMapping{
   }
 }
 ```
+====
+## Mapping from Solidiy by Example
+Maps are created with the syntax `mapping(keyType => valueType)`. `keyType` can be value types such as uint, address or bytes. `valueType` can be any type including another mapping or an array. Mappings are not iterable.
+```sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.10;
 
+contract Mapping{
+  //Mapping from address to uint
+  mapping(address => uint) public myMap;
 
+  function get(address _addr) public returns(uint){
+    //Mapping always returns a value. If the value was never set, it will return the default value.
+    return myMap[_addr];
+  }
 
+  function set(address _addr, uint _i) public{
+    //Update the value at this address
+    myMap[_addr] = _i;
+  }
 
+  function remove(address _addr) public {
+    //Reset the value to the default value
+    delete myMap[_addr];
+  }
+}
 
+contract NestedMapping{
+  //Nested mapping (mapping from address to another mapping)
+  mapping(address => mapping(uint => bool))public nested;
+  
+  function get(address _addr1, uint _i) public view returns (bool) {
+    //You can get values from a nested mapping even when it is not initialized
+    return nested[_addr][_i];
+  }
+
+  function set(
+    address _addr1,
+    uint _i,
+    bool _boo
+  ) public {
+    nested[_addr1][_i] = _boo;
+  }
+
+  function remove(address _addr1, uint _i) public {
+    delete nested[_addr1][_i];
+  }
+}
+```
+====
+## Smart Contract Programmer
+```sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.10;
+
+//Mapping, how to declare a mapping (simple and nested)
+// Process in mapping, set, get and delete
+contract Mapping {
+  mapping(address => uint) public balances;
+  mapping(address => mapping(address => bool)) public isFriend;
+
+  function examples() external {
+    balances[msg.sender] = 123;
+    uint bal = balances[msg.sender];
+    uint bal2 = balances[address[i]]; // 0
+
+    balances[msg.sender] += 456; //123 + 456 = 579
+    delete balances[msg.sender]; // return to default value = 0
+
+    isFriend[msg.sender][adddress(this)] = true;
+  }
+}
+```
+
+===============
+19. Iterable Mapping
+Iterate is not the case for mappings, we cannot get the size of the maping and we cannot iterate it to get all of the elements of the mapping unless we internally keep track of all of the keys in the mapping. Here we will create the mapping that you can iterate, meaning that you'll be able to get the size of the mapping and you'll be able to run a for-loop to get all of the elements inside the mapping.
+We're gonna need a mapping that keeps track whether a key is inserted or not.
+```sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.10;
+
+contract IterableMapping{
+  mapping(address => uint) public balances;
+  mapping(address => bool) public inserted;
+  address[] public keys;
+
+  function set(address _key, uint _val) external {
+    balances[_key] = _val;
+
+    if(!inserted[_key]){
+      inserted[_key] = true;
+      keys.push(_key)
+    }
+  }
+
+  function getSize() external view returns (uint) {
+    return keys.length;
+  }
+
+  function first() external view returns (uint) {
+    return balances[keys[0]];
+  }
+
+  function last() external view returns (uint) {
+    return balances[keys[keys.length - 1]];
+  }
+
+  function get(uint _i) external view returns (uint) {
+    return balances[keys[_i]];
+  }
+}
+```
+
+===============
+20. Struct
+Struct are custom defined types that can group several variables. Solidity provides a wayt to define new types in the form of structs, which is shown in the following example
+```sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.10;
+
+//Voting dApp
+contract Ballot {
+  //This is the Struct
+  struct Voter { 
+    uint weight;
+    bool voted;
+    address delegate;
+    uint vote;
+  }
+}
+
+// Crowdfunding dApp
+//Defines a new type with two fields. Declaring a struct outside a contract allows it to be shared by multiple contracts. Here, this is not really needed.
+
+struct Funder{
+  address addr;
+  uint amount;
+}
+
+contract CrowdFunding {
+  //Structs can also be defined inside contracts, which makes them visible only there and in derived contracts.
+  struct Campaign {
+    address payable beneficiary;
+    uint fundingGoal;
+    uint numFunders;
+    uint amount;
+    mapping(uint => Funder) funders;
+  }
+
+  uint numCampaigns;
+  mapping(uint => Campaign) campaign;
+  
+  function newCampaign(address payable beneficiary, uint goal) public returns (uint campaignID){
+    campaignID = numCampaigns++; //campaignID is return variable
+    //We cannot use `campaigns[campaignID]=Campaign(beneficiary, goal, 0,0)` because the right hand side creates a memory-struct "Campaign" that contains a mapping.
+    Campaign storage c = campaigns[campaignID];
+    c.beneficiary = beneficiary;
+    c.fundingGoal = goal;
+  }
+
+  function contribute(uint campaignID) public payable {
+    Campaign storage c = campaigns[campaignID];
+    //Creates a new temporary memory struct, initialised with the given values and copies it over to storage.
+    //Note that you can also use Funder(msg.sender, msg.value) to initialise.
+    c.funders[c.numFunders++] = Funder({
+      addr: msg.sender,
+      amount: msg.value
+    });
+    c.amount += msg.value;
+  }
+
+  function checkGoalReached(uint campaignID) public returns (bool reached) {
+    Campaign storage c = campaigns[campaignID];
+    if(c.amount < c.fundingGoal)
+      return false;
+    uint amount = c.amount;
+    c.amount = 0;
+    c.beneficiary.transfer(amount);
+    return true;
+  }
+}
+```
+The contract does not provide the full functionality of a crowdfunding contract, but it contains the basic concepts necessary to understand structs. Structs types can be used inside mappings and arrays and they can themselves containt mapping and arrays. It is not possible for a struct to containt a member of its own type, although the struct itself can be the value type of a mapping member or it can contain a dynamically-sized array of its type. This restriction is necessary, as the size of the sturct has to be finite. 
+Note how in all the functions, a struct type is assigned to a local variable with data location `storage`. This does not copy the struct but only stores a reference so that assignments to members of the local variable actually write to the state. Of course, you can also directly access the members of the struct without assigning it to a local variable, asn in `campaigns[campaignID.amount = 0]`.
+{NOTE: Until Solidity 0.7.0, memory-structs containing members of storage-only types (e.g. mappings) were allowed and assignments like campaigns[campaignID] = Campaign(beneficiary, goal, 0, 0) in the example above would work and just silently skip those members.}
+====
+## Struct Smart Contract Programmer
+--> Defining a Struct, struct allow us to groud data together.
+2. Use in State Variables
+3. Initialize
+4. Get
+5. Update
+6. Delete
+```sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.10;
+
+contract Structs
+```
+====
+## Solidity By Examples
+You can define your own type by creating a struct. They are useful for grouping together related data. Structs can be declared outside of a contract and imported in another contract.
+```sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.10;
+
+contract Todos {
+  struct Todo {
+    string text;
+    bool completed;
+  }
+
+  //An array of 'Todo' struct;
+  Todo[] public todos;
+  
+  function create(string memory _text) public {
+    //3 ways to initialize a struct - calling it like a function
+    todos.push(Todo(_text, false));
+
+    //Key value mapping
+    todos.push(Todo({
+      text: _text,
+      completed: false
+    }));
+
+    //Initialize an empty struct and then update it
+    Todo memory todo;
+    todo.test = _text;
+    //todo.completed initialized to false
+
+    todos.push(todo);
+  }
+
+  //Solidity automatically created a getter for 'todos' so you don't actually need this functino
+  function get(uint _index) public view returns (string memory text, bool completed) {
+    Todo storage todo = todos[_index];
+    return(todo.text, todo.completed);
+  }
+
+  //Update Text
+  function update(uint _index, string memory _text) public {
+    Todo storage todo = todos[_index];
+    todo.text = _text;
+  }
+
+  //Update Completed
+  function toggleCompleted(uint _index) public {
+    Todo storage todo = todos[_index];
+    todo.completed = !todo.completed;
+  }
+}
+```
 
 
 
