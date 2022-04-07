@@ -56,11 +56,123 @@ Then run:
 $ npx hardhat test
 ```
 You should see something like this:
-
 🚨 Before you click "Next Lesson"
  
 - Write your first smart contract in Solidity
+👩‍💻 Let's write a contract
+Awesome, we made it. We're just going to hop right into our projects. Let's build a smart contract that lets us send a 👋 to our contract and keep track of the total # of waves. This is going to be useful because on your site, you mgith want to keep trackt of this #1 Fele free to change this to fit your use case. Create a file named WavePortal.sol under the contracts directory. File structure is super important when using Hardhat, so, be careful here! We're going to start out with the structure every contract starts out with.
+```sol
+// SPDX-License-Identifier: UNLICENSED
+
+pragma solidity ^0.8.0;
+
+import "hardhat/console.sol";
+
+contract WavePortal{
+  constructor(){
+    console.log("Yo yo, I am a contract and I am smart");
+  }
+}
+```
+Note: You may want to download the VS Code Solidity extension for easy syntax highlighting here.
+```sol
+// SPDX-License-Identifier: UNLICENSED
+```
+Just a fancy comment.  It's called a "SPDX license identifier", feel free to Google what it is :).
+```sol
+pragma solidity ^0.8.0;
+```
+This is the version of the Solidity compiler we want our contract to use. It basically says "when running this, I only want to use version 0.8.0 of the Solidity compiler, nothing lower. Note, be sure that the compiler version is the same in hardhat.config.js.
+```sol
+import "hardhat/console.sol";
+```
+Some magic given to us by Hardhat to do some console logs in our contract. It's actually challenging to debug smart contracts but this is one of the goodies Hardhat gives us to make life easier.
+```sol
+contract WavePortal {
+    constructor() {
+        console.log("Yo yo, I am a contract and I am smart");
+    }
+}
+```
+So, smart contracts sort of look like a class in other languages, if you've ever seen those! once we initialize this contract for the first time, that constructor will run and printe out that line. Please make that line say whatever you want it!. In the next lesson, we'll run this and see what we get!
+🚨 Before you click "Next Lesson"
+Note: if you don't do this, Farza will be very sad :(.
+Go to #progress and post a screenshot of your fancy contract in the WavePortal.sol file :).
+
 - Compile contract locally and run it
+🔥 Imitating the blockchain environment to test
+You've done it. You've written a smart contract. You're a champ!
+Now we need to actually
+1. Compile it.
+2. Deploy it to our local blockchain
+3. Once it's there, that console.log will run :).
+We need to do this because in the real world, smart contract slive on the blokchcian. And, we want our websites and smart contract be used by real people so the can 👋 at us or do whatever you want them to do!. So, even when we're working locally we want to imitate that environment. Technically, we could just compile and run Solidity code, but what makes Solidity magical is how it can interact with the blockchain and Ethereum wallets (which we'll see more of in the next lesson). So, better to just knock this out right now. We're just going to write a custom script that handles those 3 steps for us.
+Let's do it!
+📝 Build a script to run our contract
+So, to test a smart contract we've got to do a bunch of stuff right. Like: compile, deploy, then execute.
+Our script will make it really easy to iterate on our contract really fast :).
+So, this is what run.js is going to have:
+```js
+const main = async () => {
+  const waveContractFactory = await hre.ethers.getContractFactory("WavePortal");
+  const waveContract = await waveContractFactory.deploy();
+  await waveContract.deployed();
+  console.log("Contract deployed to:", waveContract.address);
+};
+
+const runMain = async() => {
+  try {
+    await main();
+    process.exit(0); // exit Node process without error
+  } catch (error) {
+    console.log(error);
+    process.exit(1); // exit Node process while indicating 'Uncaught Fatal Exception' error
+  }
+  // Read more about Node exit ('process.exit(num)') status codes here: https://stackoverflow.com/a/47163396/7974948
+}
+
+runMain();
+```
+
+🤔 How's it work?
+Again going line by line here.
+```js
+const waveContractFactory = await hre.ethers.getContractFactory("WavePortal");
+```
+This will actually compile our smart contrat and generate the necessary files we need to work with our contract under that `artifacts` directory. Go check it ou after you run this.
+```js
+const waveContract = await waveContractFactory.deploy();
+```
+This is pretty fancy :). 
+What's happening here is Hardhat will create local Ethereum network for use, but just for this contrat. Then, after the script completes it'll destroy that local network. So, eveyr time you run the contract, it will be a fresh blockchain. What's the point? It's kinda like refreshing your local server every time som you alwasy start from a clean slate which makes it easy to debug errors.
+```js
+await waveContract.deployed();
+```
+We'll wait until our contract is officially deployed to our local blockchain! Our constructor runs when we actually deploy.
+```js
+console.log("Contract deployed to:", waveContract.address);
+```
+Finally, once it's deployued `waveContract.address` will basically give us the address of the deployed contract. This address is how we can actualy find our contract on the blockchain. There are millions of contracts on the actual blockchain. So, this address gives us easy access to the contract we're interested in working with! This will be more important a bit later once we deploy to a real Ethereum network. Let's run it!
+```bash
+$ npx hardhat run scripts/run.js
+```
+You should see your console.log run from within the contract and then you should also see the contract address print out!!! Here's what I get:
+[IMAGE](https://i.imgur.com/ug79rOM.png)
+
+🎩 Hardhat & HRE
+In these code blocks you will constantly notice that we use hre.ethers, but hre is never imported anywhere? What type of magic trick is this? Directly from the Hardhat docs themselves you will notice this:
+```docs
+The Hardhat Runtime Environment, or HRE for short, is an object containing all the functionality that Hardhat exposes when running a task, test or script. In reality, Hardhat is the HRE.
+```
+So what does this mean? well, every time you run a terminal command that starts with npx hardhat you are getting this hre object built on the fly using `hardhat.config.js` specified in your code! This means you will never have to actually do some sort of import into your files like:
+const hre = require("hardhat")
+TL;DR - you will be seeing hre a lot in our code, but never imported anywhere! Checkout this cool Hardhat documentation to learn more about it!
+
+🚨 Before you click "Next Lesson"
+Note: if you don't do this, Farza will be very sad :(.
+Go to #progress and post a screenshot of your terminal with the output.
+Be sure to make that console.log whatever you want! You've now written your own contract and ran it by deploying to a local blockchain WOOOOOOOOOO LETS GOOO.
+
 - Store data on our smart contract
 - Deploy locally so we can start building the wbsite
 
