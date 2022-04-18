@@ -1,0 +1,8 @@
+1. Start with a Goal, focus on skill that they're want to learn to provide a value in that spaces. (Pick some sort of focus)
+2. Break it into concrete steps (or into smaller manageable test and Focus on the first thing first ), with looking the finish line before determine the starting point. Ex. if you want to become defi developer, just choose the defi example application that you want to create or learn.
+3. The fastest way to learn is to build a project. (projects based learning). Looking those smart contract and understand how they workd, documentation and smart contract or commands of the code, trace the logic of the smart contract, code something from that code/smart contract with a simplified version (write the code that does it), and then put it to the test network so anyone can use it.
+
+90 Day Plan
+1. Dealing to imposter syndrome
+2. Starting line, once you have been doing coding tutorials, and then you have started tp create something for yourself completely unguided (nobody holding your hand throughout the entire process), and then you've put it out there online to where somebody else can use it and you open source the code througout they will be looking the code that you actually wrote and then you put that together into your portfolio, that's when you're ready to startup the job. (just cross the line, sometimes our fear is irrational)
+3. 
