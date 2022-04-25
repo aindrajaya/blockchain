@@ -1,0 +1,48 @@
+{
+  "name": "metaverse",
+  "version": "1.0.0",
+  "description": "this projects if for learning purpose",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --mode development",
+    "build": "webpack --mode production"
+  },
+  "keywords": [
+    "metaverse",
+    "3d",
+    "blockchain",
+    "virtual",
+    "land"
+  ],
+  "author": "aindrajaya",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@nomiclabs/hardhat-ethers": "^2.0.5",
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "autoprefixer": "^10.4.4",
+    "babel-loader": "^8.2.4",
+    "chai": "^4.3.6",
+    "css-loader": "^6.7.1",
+    "ethereum-waffle": "^3.4.4",
+    "ethers": "^5.6.2",
+    "hardhat": "^2.9.2",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "postcss": "^8.4.12",
+    "postcss-cli": "^9.1.0",
+    "postcss-loader": "^6.2.1",
+    "style-loader": "^3.3.1",
+    "tailwindcss": "^3.0.23",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
