@@ -1,3 +1,9 @@
 # Etherscan API 
 
 1. Topics (topic0_1_opr): Each log record consists of **topics** and **data**. Topics are 32-byte (256 bit) "words" that are used to describe what's going on in an event. Different opcodes (LOG0,... LOG4) are needed to describe the numbe of topics that need to be included in the log record. For instance, LOG1 includes one topic, while LOG4 includes four topics. Therefore, the maximum number of topics that can be included in a single log is four. **Topics in Ethereum Log records**, the first part of a log record consists of an array of topics. These topics are used to describe the event. The first topic usually consists of the signature (a keccak256 hash) of the name of the even that occured, including the types (uint256, string, etc) of its parameters. One exception where this signature is not included as the first topic is when emitting anonymous events. 
+
+2. Ethereum Proxy: a service running on the Ethereum wire protocol, allowing one or more clients to run behind it while keeping conections open.
+ `eth_blockNumber`: Returns the numbe rof most recent block
+ `eth_getByBlockByNumber`: Returns information about a block by block number
+ `eth_getUncleByBlockNumberAndIndex`: Returns information about a uncle by block number. Can be retrieve the block that holds the block number of that uncle (Uncle blocks are similar to orphan blocks on Bitcoin, but have subtle distinctions connected with the Ethereum protocol. Uncle blocks are valid blocks that the networks has rejected. Miners get paid for producing an uncle block, unlike an orphan block, where miners don't get rewarded)
+ 
