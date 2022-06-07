@@ -13,4 +13,6 @@
  `eth_sendRawTransaction`: Submit a pre-signed transaction for broadcast to the Ethereum network or it can be say creates a new message call transaction or contract creation for signed transactions
  `eth_getTransactionReceipt`: Return the receipt of a tranasction by transaction hash
  `eth_call`: Executes a new message ecall immediately without creating a transaction on the blockchain. This one is one of the most commonly used API calls. It is used to read from the blockchain which includes executing smart contracts but does not publish anything to the blockchain. This call does not consume any Ether. Started from Geth 1.9.13, *eth_call* will check the balance of the sender (to make sure that the sender has enough gas to complete the request) before executing the call when one of the following conditions is true: (-) The *gas_price* parameter is populted, or (-) the contract function being called. In these two cases, even though the *eth_call* requests don't consume any gas, the *from* address mus have enough gas to execute the call as if it were a write transaction because *eth_call* is being used to simulate the transaction.
- 
+ `eth_getCode`: Returns code at a given address. 
+ `eth_getStorageAt`: Returns the value from a storage position at a given address, or in other words, returns the state of the contract's storage, whichmay not be exposed via the contract's methods.
+ `eth_gasPrice`: Returns the current price per gas in wei. 
