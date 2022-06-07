@@ -6,5 +6,9 @@
  `eth_blockNumber`: Returns the numbe rof most recent block
  `eth_getByBlockByNumber`: Returns information about a block by block number
  `eth_getUncleByBlockNumberAndIndex`: Returns information about a uncle by block number. Can be retrieve the block that holds the block number of that uncle (Uncle blocks are similar to orphan blocks on Bitcoin, but have subtle distinctions connected with the Ethereum protocol. Uncle blocks are valid blocks that the networks has rejected. Miners get paid for producing an uncle block, unlike an orphan block, where miners don't get rewarded)
- `eth_getBlockkTransactionCountByNumber`: Returns the number of transactions in a block matching the given block number, the string tag is 'earlies', 'latest', or 'pending'.
+ `eth_getBlockTransactionCountByNumber`: Returns the number of transactions in a block matching the given block number, the string tag is 'earlies', 'latest', or 'pending'.
  `eth_getTransactionByHash`: Returns the information about a transaction requested by transaction hash. In response object, *blockHash*, *blockNumber* and *transactionIndex* are *null* when the transaction is pending.
+ `eth_getTransactionByBlockNumberAndIndex`: Returns information about a transaction by block number and transaction index position.
+ `eth_getTransactionCount`: Will returns the number of transactions performed by an address. 
+ `eth_sendRawTransaction`: Submit a pre-signed transaction for broadcast to the Ethereum network or it can be say creates a new message call transaction or contract creation for signed transactions
+ `eth_getTransactionReceipt`: Return the receipt of a tranasction by transaction hash
