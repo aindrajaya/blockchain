@@ -21,3 +21,4 @@
  3. Ethereum Stats moudle/ service:
  `tokensupply`: Returns the current amount of an especially ERC-20 token in circulation.
 `ethsupply`: Returns the current amount of Ether in circulation excluding ETH2 staking rewards end EIP1559 burnt fees.
+ `ethprice`: returns the latest price of 1 ETH
