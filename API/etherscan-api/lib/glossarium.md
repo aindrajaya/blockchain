@@ -17,3 +17,6 @@
  `eth_getStorageAt`: Returns the value from a storage position at a given address, or in other words, returns the state of the contract's storage, whichmay not be exposed via the contract's methods.
  `eth_gasPrice`: Returns the current price per gas in wei. 
  `eth_estimateGas`: Makes a clal or transaction, which won't be added to the blockchain and r eturns the used gas. It can be Generate and returns and estimate of how much gas is necessary to allow the transaction to complete. The transaction will not be added to the blockchain. NOTE: The estimate may be significantly more than the amout of gas actually used by the transaction, for a variety of reasons including EVM mechanics and node performance. Estimates are served directly from nodes, we're not doing anythig special to the value so the rest of the network is likely seeing the same.
+
+ 3. Ethereum Stats moudle/ service:
+ `tokensupply`: Returns the current amount of an especially ERC-20 token in circulation.
