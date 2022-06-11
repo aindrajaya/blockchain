@@ -38,7 +38,7 @@ module.exports = function(apiKey, chain, timeout, client = null) {
     });
   }
 
-  // var getRequest = requre('./getRequest')(chain, timeout, client);
+  var getRequest = require('./getRequest')(chain, timeout, client);
   /**
    * @lends module:etherscan/api
    */
