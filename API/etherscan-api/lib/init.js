@@ -4,7 +4,7 @@ const axios = require('axios');
 //Libs called
 const log =  require('./log')
 const proxy = require('./proxy');
-// const stats = require('./stats');
+const stats = require('./stats');
 // const block = require('./block');
 // const transaction = require('./transaction');
 // const contract = require('./contract');
@@ -54,7 +54,7 @@ module.exports = function(apiKey, chain, timeout, client = null) {
     /**
      * @namespace
      */
-    // stats: stats(getRequest, apiKey),
+    stats: stats(getRequest, apiKey),
     /**
      * @namespace
      */
