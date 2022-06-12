@@ -9,7 +9,9 @@ const block = require('./block');
 // const transaction = require('./transaction');
 // const contract = require('./contract');
 // const account = require('./account');
-// const pickChainUrl = require('./pickChainUrl');
+
+//libs extension
+const pickChainUrl = require('./pickChainUrl');
 
 /**
  * @module etherscan/api
