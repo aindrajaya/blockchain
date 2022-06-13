@@ -18,10 +18,13 @@
  `eth_gasPrice`: Returns the current price per gas in wei. 
  `eth_estimateGas`: Makes a clal or transaction, which won't be added to the blockchain and r eturns the used gas. It can be Generate and returns and estimate of how much gas is necessary to allow the transaction to complete. The transaction will not be added to the blockchain. NOTE: The estimate may be significantly more than the amout of gas actually used by the transaction, for a variety of reasons including EVM mechanics and node performance. Estimates are served directly from nodes, we're not doing anythig special to the value so the rest of the network is likely seeing the same.
 
- 3. Etherscan Stats moudle/ service:
+3. Etherscan Stats moudle/ service:
  `tokensupply`: Returns the current amount of an especially ERC-20 token in circulation.
 `ethsupply`: Returns the current amount of Ether in circulation excluding ETH2 staking rewards end EIP1559 burnt fees.
  `ethprice`: returns the latest price of 1 ETH
 
- 4. Etherscan API Block Service
+4. Etherscan API Block Service
  `getblockreward`: Returns the block reward and 'Uncle' block rewards
+
+5. Etherscan API transaction service getstatus
+ `getstatus`: Returns the status code of a contract execution
