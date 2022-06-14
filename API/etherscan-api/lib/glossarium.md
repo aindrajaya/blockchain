@@ -31,3 +31,4 @@
 
 6. Etherscan API Contract module/ service
 `getabi`: Returns the Contrac Application Binary Interface (ABI) of a verified smart contract. 
+`getsourcecode`: Returns the solidity source code of a verified smart contract
