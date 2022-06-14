@@ -7,7 +7,7 @@ const proxy = require('./proxy');
 const stats = require('./stats');
 const block = require('./block');
 const transaction = require('./transaction');
-// const contract = require('./contract');
+const contract = require('./contract');
 // const account = require('./account');
 
 //libs extension
@@ -68,7 +68,7 @@ module.exports = function(apiKey, chain, timeout, client = null) {
     /**
      * @namespace
      */
-    // contract: contract(getRequest, apiKey);
+    contract: contract(getRequest, apiKey),
     /**
      * @namespace
      */
