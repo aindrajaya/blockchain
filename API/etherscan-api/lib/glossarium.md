@@ -28,3 +28,6 @@
 
 5. Etherscan API transaction service getstatus
  `getstatus`: Returns the status code of a contract execution
+
+6. Etherscan API Contract module/ service
+`getabi`: Returns the Contrac Application Binary Interface (ABI) of a verified smart contract. 
