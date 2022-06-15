@@ -32,3 +32,6 @@
 6. Etherscan API Contract module/ service
 `getabi`: Returns the Contrac Application Binary Interface (ABI) of a verified smart contract. 
 `getsourcecode`: Returns the solidity source code of a verified smart contract
+
+7. Etherscan API Account module/service
+`tokenbalance`: returns the current balance of an ERC-20 token of an address
