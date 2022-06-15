@@ -36,3 +36,4 @@
 7. Etherscan API Account module/service
 `tokenbalance`: returns the current balance of an ERC-20 token of an address
 `balance`: Returns the Ether balance of a given address
+`txlistinternal`: Returns the list of internal transactions performed by an address, with optional pagination. NOTE: This API endpoints returns a maximum of 10000 records only.
