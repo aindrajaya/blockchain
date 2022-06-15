@@ -35,3 +35,4 @@
 
 7. Etherscan API Account module/service
 `tokenbalance`: returns the current balance of an ERC-20 token of an address
+`balance`: Returns the Ether balance of a given address
