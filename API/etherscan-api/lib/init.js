@@ -8,7 +8,7 @@ const stats = require('./stats');
 const block = require('./block');
 const transaction = require('./transaction');
 const contract = require('./contract');
-// const account = require('./account');
+const account = require('./account');
 
 //libs extension
 const pickChainUrl = require('./pickChainUrl');
@@ -72,6 +72,6 @@ module.exports = function(apiKey, chain, timeout, client = null) {
     /**
      * @namespace
      */
-    // account: account(getRequest, apiKey);
+    account: account(getRequest, apiKey)
   };
 };
