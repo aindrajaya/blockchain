@@ -39,3 +39,4 @@
 `txlistinternal`: Returns the list of internal transactions performed by an address, with optional pagination. NOTE: This API endpoints returns a maximum of 10000 records only.
 `txlist`: Returns the list of transactions performed by an address, with optional pagination.
 `getminedblocks`: Returns the list of blocks mined by an address
+`tokentx`: Returns the list of ERC-20 tokens transfered by an address, with optional filtering by token contract. Usage of this method: (-) ERC-20 transfers from an address, specify the *address* parameter; (-) ERC-20 transfers from a contract address, specify the *contract address* pararmeter; (-) ERC-20 transfers from an addres filtered by a token contract, specify both *address* and *contract address* parameters.
