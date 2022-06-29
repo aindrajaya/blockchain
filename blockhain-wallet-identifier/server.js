@@ -26,27 +26,27 @@ app.get("/session", (req, res) => {
   res.send(req.sessionID)
 })
 
-// app.get("/signature", (req, res) => {
-//   let error = "", realAddr = ""
-//   const expectedMsg = `My session ID: ${req.sessionID}`
-//   const hash = ethers.utils.id(`\x19Ethereum Signed Message:\n${expectedMsg.length}${expectedMsg}`)
-//   const claimedAddr = req.query.addr
+app.get("/signature", (req, res) => {
+  let error = "", realAddr = ""
+  const expectedMsg = `My session ID: ${req.sessionID}`
+  const hash = ethers.utils.id(`\x19Ethereum Signed Message:\n${expectedMsg.length}${expectedMsg}`)
+  const claimedAddr = req.query.addr
 
-//   try{
-//     realAddr = ethers.utils.recoverAddress(hash, req.query.sig)
-//   } catch(e){
-//     error = e.reason
-//   }
+  try{
+    realAddr = ethers.utils.recoverAddress(hash, req.query.sig)
+  } catch(e){
+    error = e.reason
+  }
 
-//   if(error){
-//     res.send(`ERROR: ${error}`)
-//   } else {
-//     if(realAddr.toLowerCase() === claimedAddr.toLowerCase())
-//       res.send(`Legitimate, welcome ${realAddr}`)
-//     else
-//       res.send(`Fraud!! You are not ${claimedAddr}, you are ${realAddr}`)
-//   }
-// })
+  if(error){
+    res.send(`ERROR: ${error}`)
+  } else {
+    if(realAddr.toLowerCase() === claimedAddr.toLowerCase())
+      res.send(`Legitimate, welcome ${realAddr}`)
+    else
+      res.send(`Fraud!! You are not ${claimedAddr}, you are ${realAddr}`)
+  }
+})
 
 app.get("*", (req, res) => {
   res.send(`
