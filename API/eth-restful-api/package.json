@@ -22,5 +22,8 @@
     "mongoose": "^6.5.2",
     "nodemon": "^2.0.19",
     "web3": "^1.7.5"
+  },
+  "devDependencies": {
+    "web3-eth-accounts": "^1.7.5"
   }
 }
