@@ -1,0 +1,26 @@
+{
+  "name": "eth-restful-api",
+  "version": "1.0.0",
+  "description": "simple ethereum rest api \u001b[D\u001b[D\u001b[D\u001b[D\u001b[Dful\u001b[3~ api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "restful",
+    "api",
+    "ethereum",
+    "blockchain"
+  ],
+  "author": "aindrajaya",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongodb": "^4.9.0",
+    "mongoose": "^6.5.2",
+    "nodemon": "^2.0.19",
+    "web3": "^1.7.5"
+  }
+}
