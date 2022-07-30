@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-controller="myCtrl">
+
+  <head>
+    <title>Client-side user identification</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+    <!--  Use the Angular library  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+    
+	<script>
+	/*eslint-env browser */
+	var myApp = angular.module("myApp", []);
+	var scope;
+
+	myApp.controller("myCtrl", function($scope, $http) {
+  		scope = $scope
+		$scope.addr = ""
+		$scope.error = ""
+		$scope.isWallet = () => typeof window.ethereum !== 'undefined'
+		$scope.connect = () => {
+			window.ethereum.request({method: 'eth_requestAccounts'})
+			.then(arr => {
+					$scope.addr = arr[0]
+					$scope.error = ""
+					$scope.$digest()
+			},    // success
+			err => {
+					$scope.error = err.message
+					$scope.$digest()
+			})   // error
+		}    // $scope.connect
+	});
+	
+	</script>
+	
+	<body>
+    <main>
+      <div class="px-4 py-5 my-5 text-center" ng-if="error">   
+        <h2>Error: {{error}}</h2>
+      </div>   
+      <div class="px-4 py-5 my-5 text-center" ng-if="isWallet()">
+        <h1 class="display-5 fw-bold mb-5">Client-side Integration</h1>
+        <h2 ng-if="addr">Address: {{addr}}</h2>
+        <button type="button" class="btn btn-primary mt-4 btn-lg px-4 gap-3" ng-if="!addr" ng-click="connect()">
+        Connect to Ethereum
+        </button>
+        <p class="lead mt-4 mb-4">Client-side integration is standard for Ethereum wallets to expose a global API on a web browser in window.ethereum</p>
+      </div>    <!-- ng-if="isWallet()" -->
+      <div ng-if="!isWallet()">
+        To use this application, please install 
+        <a href="https://metamask.io">MetaMask</a> or
+        some other Ethereum wallet.
+      </div>
+    </main>
+  </body>
+</html>
