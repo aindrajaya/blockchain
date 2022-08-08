@@ -1,0 +1,30 @@
+{
+  "name": "etherscan-api",
+  "version": "1.0.0",
+  "description": "nodejs wrapper for etherscan api to fetch data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "etherscan",
+    "api",
+    "ethereum",
+    "wrapper",
+    "rest",
+    "blockchain"
+  ],
+  "author": "aindrajaya",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "17.0.0",
+    "chai": "4.3.6",
+    "jshint": "2.13.5",
+    "mocha": "10.0.0",
+    "watch": "0.13.0"
+  },
+  "dependencies": {
+    "axios": "0.27.2",
+    "querystring": "0.2.1"
+  }
+}
