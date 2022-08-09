@@ -18,7 +18,26 @@
  `eth_gasPrice`: Returns the current price per gas in wei. 
  `eth_estimateGas`: Makes a clal or transaction, which won't be added to the blockchain and r eturns the used gas. It can be Generate and returns and estimate of how much gas is necessary to allow the transaction to complete. The transaction will not be added to the blockchain. NOTE: The estimate may be significantly more than the amout of gas actually used by the transaction, for a variety of reasons including EVM mechanics and node performance. Estimates are served directly from nodes, we're not doing anythig special to the value so the rest of the network is likely seeing the same.
 
- 3. Ethereum Stats moudle/ service:
+3. Etherscan Stats moudle/ service:
  `tokensupply`: Returns the current amount of an especially ERC-20 token in circulation.
 `ethsupply`: Returns the current amount of Ether in circulation excluding ETH2 staking rewards end EIP1559 burnt fees.
  `ethprice`: returns the latest price of 1 ETH
+
+4. Etherscan API Block Service
+ `getblockreward`: Returns the block reward and 'Uncle' block rewards
+
+5. Etherscan API transaction service getstatus
+ `getstatus`: Returns the status code of a contract execution
+
+6. Etherscan API Contract module/ service
+`getabi`: Returns the Contrac Application Binary Interface (ABI) of a verified smart contract. 
+`getsourcecode`: Returns the solidity source code of a verified smart contract
+
+7. Etherscan API Account module/service
+`tokenbalance`: returns the current balance of an ERC-20 token of an address
+`balance`: Returns the Ether balance of a given address
+`txlistinternal`: Returns the list of internal transactions performed by an address, with optional pagination. NOTE: This API endpoints returns a maximum of 10000 records only.
+`txlist`: Returns the list of transactions performed by an address, with optional pagination.
+`getminedblocks`: Returns the list of blocks mined by an address
+`tokentx`: Returns the list of ERC-20 tokens transfered by an address, with optional filtering by token contract. Usage of this method: (-) ERC-20 transfers from an address, specify the *address* parameter; (-) ERC-20 transfers from a contract address, specify the *contract address* pararmeter; (-) ERC-20 transfers from an addres filtered by a token contract, specify both *address* and *contract address* parameters.
+`tokennfttx`: Returns the list of ERC-721 (NFT) tokens transferred by an address, with optional filtering by token contract. Usage of this method is: (-) ERC721 transfers from an address, specify the *address* parameter; (-) ERC721 transfers from contract address, specify the *contract address* parameter; (-) ERC721 transfers from an address fildered by a token contract, specify both *address* and *contract address* parameters.

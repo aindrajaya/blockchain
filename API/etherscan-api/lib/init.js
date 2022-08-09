@@ -4,12 +4,14 @@ const axios = require('axios');
 //Libs called
 const log =  require('./log')
 const proxy = require('./proxy');
-// const stats = require('./stats');
-// const block = require('./block');
-// const transaction = require('./transaction');
-// const contract = require('./contract');
-// const account = require('./account');
-// const pickChainUrl = require('./pickChainUrl');
+const stats = require('./stats');
+const block = require('./block');
+const transaction = require('./transaction');
+const contract = require('./contract');
+const account = require('./account');
+
+//libs extension
+const pickChainUrl = require('./pickChainUrl');
 
 /**
  * @module etherscan/api
@@ -38,7 +40,7 @@ module.exports = function(apiKey, chain, timeout, client = null) {
     });
   }
 
-  // var getRequest = requre('./getRequest')(chain, timeout, client);
+  var getRequest = require('./getRequest')(chain, timeout, client);
   /**
    * @lends module:etherscan/api
    */
@@ -54,22 +56,22 @@ module.exports = function(apiKey, chain, timeout, client = null) {
     /**
      * @namespace
      */
-    // stats: stats(getRequest, apiKey),
+    stats: stats(getRequest, apiKey),
     /**
      * @namespace
      */
-    // block: block(getRequest, apiKey),
+    block: block(getRequest, apiKey),
     /**
      * @namespace
      */
-    // transaction: transaction(getRequest, apiKey),
+    transaction: transaction(getRequest, apiKey),
     /**
      * @namespace
      */
-    // contract: contract(getRequest, apiKey);
+    contract: contract(getRequest, apiKey),
     /**
      * @namespace
      */
-    // account: account(getRequest, apiKey);
+    account: account(getRequest, apiKey)
   };
 };
