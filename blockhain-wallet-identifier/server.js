@@ -51,11 +51,19 @@ app.get("/signature", (req, res) => {
 app.get("*", (req, res) => {
   res.send(`
     <htmL>
+      <title>Server and client-side user identification</title>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
       <body>
-        <ul>
-          <li><a href="/client_side.html">Client side user authentication</a></li>
-          <li><a href="/server_side.html">Server side user authentication</a></li>
-        </ul>
+        <div class="container px-4 py-5 my-5 text-center">
+          <h1 class="display-5 fw-bold lh-1 mb-3">Client and Server side Wallet Integration</h1>
+          <p class="lead">Example for the Metamask wallet integration from client or server side.</p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <a href="/server_side.html" role="button" class="btn btn-primary btn-lg px-4 me-md-2 mr-4">Server</a>
+            <a href="/client_side.html" role="button" class="btn btn-outline-secondary btn-lg px-4 ml-4">Client</a>
+          </div>
+        </div>
       </body>
     </htmL>
   `)
