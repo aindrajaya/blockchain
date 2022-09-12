@@ -1,0 +1,17 @@
+{
+  "name": "blockhain-wallet-identifier",
+  "version": "1.0.0",
+  "description": "wallet identifier to send signer transaction from the wallet",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["blockchain", "wallet"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ethers": "^5.5.4",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2"
+  }
+}
