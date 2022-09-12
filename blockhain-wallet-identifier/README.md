@@ -7,7 +7,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/aindrajaya/blockchain/tree/master/blockchain-wallet-integration">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://banner2.cleanpng.com/20180713/ll/kisspng-online-wallet-bitcoin-cryptocurrency-wallet-money-petai-5b48cb6a0b0fa2.1447918415314973220453.jpg" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Client and Server side Wallet Integration</h3>
@@ -137,4 +137,4 @@ Project Link: [Client and Server wallet integration](https://github.com/aindraja
 [issues-url]: https://github.com/aindrajaya/blockchainn/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/aindrajaya
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: images/screenshot.gif
