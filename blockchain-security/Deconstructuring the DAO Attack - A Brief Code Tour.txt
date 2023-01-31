@@ -1,0 +1,31 @@
+DECONSTRUCTURING THE DAO ATTACK : A BRIEF CODE TOUR
+(https://vessenes.com/deconstructing-thedao-attack-a-brief-code-tour/)
+---------------------------------------------------
+The DAO was attacked today, and the attacker seems to hav emad of with 3.5mm ether (at time of wrigin in excess of $45mm). The vulerability was the React to Empty or Reccursive Call attack. We'll probably be writing about this for some time, bu I wanted to get out there what's known now, and trace out the attack so people can see hwo this attack looks like in the wild. Thanks for this writeup go to a number of helpful people in Ethereum land; Joey Krug wroteup some initial thoughts and is a source of knowledge and information at all times. Dennis Peterson as usual did a bunch of heavy lifting and coed review in the early stages this moring, Nick Johnson did theoretical work and batted around some possible solutions. 
+Tim Goddard identified the Transfer/transfer confusion through prodigious effor, end led the way figuring out why this exploit was able to turn 258 ethere into 3.5 mm rather than 'just' 7500.
+
+#Somw Background and Where to Look
+We'll start with the splitDAO function, for two reasons-- the attacker seems have been creating child DAOs, and this is the only active mechanism for getting coins out a; second step would be to look at the proposal mechanism if this unsuccessful. To recap the purpose of this function: a subset of theDAO token holders have decide they'd like to "split" -- either because theu do no agree with a proposal, or (at this stage in theDao's brief eventual life) because they wish to withdraw funds. The mechanism for doing so is to create a split proposal. Split proposals take 7 adys to 'mature' and get participants in. Any participants voting 'yes' in the split will be given the right to call splitDAO. splitDAO will create the DAO child contract if it doesn't exits, send the ether controlled by the splitters into the childDAO, py out any acruted 'reward' pro-rata to the splitters, and return. At leas, that's the plan.
+
+#A Complication
+Some code review happened on the currently lie 'tip' of the master branch og theDAO's code on github. Unfortunately, that is NOT the code that has been deployed at theDAO's main contract address. This caused quite a lot of confusion, and hightlights a real issue in these analyses- is the code I'm looking at the same code that is running? More on this at a later date, but verifications is a problem, and it bit some fairly sophisticated reviewers in a hurry this morning.
+
+#The COde
+I'm cuttin our some of the splitDAO function here to focus on the good bits.
+[function splitDAO(
+  uint _proposalID, 
+  address _newCurator
+) noEther onlyTakenholders returns (bool _success)
+{}
+]
+Okay, we'ev got a function. It can't be sent ether. It can only be called by token holders. Let's see what we've got. [snip..] 
+A line that says "move ether". Tell me more...
+[// Move ether and assign new Tokens
+  uint fundsToBeMoved = (balances[msg.sender] * p.splitData[0].splitBalance) / p.splitData[0].totalSupply;
+if (p.splitData[0].newDAO.createTokenProxy.value(fundsToBeMoved)(msg.sender) === false) throw;]
+Okay, what's happening here is we're calculating out how much to move for this particular caller, and then calling the createTokenProxy function. Let's remember this bit.
+[snip]
+//Burn DAO Tokens
+  Transfer(msh.sender, 0, balances[msg.sender]);
+  withdrawRewardFor(msg.sender); //be nice, and ge his rewards
+  totalSupply -= balances[msg.sender]
